@@ -1,0 +1,26 @@
+name: Build & Deploy
+on:
+  push:
+    branches: 
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy NodeJS App
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{ secrets.SSH_PROD_HOST }} 
+          key: ${{ secrets.SSH_KEY }}  
+          username: ${{ secrets.SSH_USERNAME }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            git clone https://github.com/zkfairdomains/fns-app.git 
+            cd fns-app/ 
+            git pull origin
+            corepack enable
+            yarn install
+            yarn build
+            mv build/* /var/www/html
+            echo 'Deployment successful...' 
+ 
