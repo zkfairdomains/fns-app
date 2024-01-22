@@ -22,6 +22,6 @@ jobs:
             corepack enable
             yarn install
             yarn build
-            mv build/* /var/www/html
+            cp -rf build/* /var/www/html
             echo 'Deployment successful...' 
  
