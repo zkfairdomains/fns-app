@@ -5,7 +5,7 @@ const Page = () => {
   return (
     <> 
       <div className="container-fluid">
-        Terms
+        Terms Page
       </div>
     </>
   )

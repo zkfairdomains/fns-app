@@ -1,5 +1,6 @@
 import Logo from '../assets/images/zkfair.svg';
 import MetaMaskLogo from '../assets/images/metamask.svg';
+import Connectwalletbutton from './ConnectWalletButton';
 function Header() {
     return ( 
         <header>
@@ -8,8 +9,8 @@ function Header() {
             <div className="controls-content">
                 <nav>
                     <ul className="d-flex">
-                        <li><a href="/home">Domains</a></li>
-                        <li><a href="/registrant">My Profile</a></li>
+                        <li><a href="/">Domains</a></li>
+                        <li><a href="/register">My Profile</a></li>
                         <li className="dropdown d-none">
                         <a className="d-block w-100 h-100 dropdown-toggle" href="javascript:;"><span class="tripledot"><em></em><em> </em><em></em></span></a>
                         <ul className="dropdown-menu">
@@ -28,7 +29,7 @@ function Header() {
                     </ul>
                 </div>
             </div>
-            <button className="wallet-connect"><span>Connect Wallet</span><img src={MetaMaskLogo} alt="" /></button><a className="mm" href="javascript:;"><span></span><span> </span><span></span></a>
+             <Connectwalletbutton></Connectwalletbutton>
             </div>
         </header>
      );

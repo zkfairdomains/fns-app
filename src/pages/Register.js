@@ -1,12 +1,19 @@
 import React from "react";
-import { Outlet } from "react-router-dom";  
+import Search from "../partials/Search";
+import Accordion from '../partials/Accordion';
+import Tabs from '../partials/Tabs';
+import Connectwalletbutton from "../partials/ConnectWalletButton";
 
 const Page = () => { 
   return (
     <> 
-      <div className="container-fluid">
-        Register
-      </div>
+      <div className="centercontent">
+            <Search />
+            <Accordion />
+            <Tabs />
+            <Connectwalletbutton />
+        </div>
+        
     </>
   )
 };
