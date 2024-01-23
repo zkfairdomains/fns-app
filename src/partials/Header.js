@@ -1,5 +1,5 @@
-import Logo from './assets/images/zkfair.svg';
-import MetaMaskLogo from './assets/images/metamask.svg';
+import Logo from '../assets/images/zkfair.svg';
+import MetaMaskLogo from '../assets/images/metamask.svg';
 function Header() {
     return ( 
         <header>

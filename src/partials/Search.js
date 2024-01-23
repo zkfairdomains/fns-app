@@ -1,4 +1,4 @@
-import searchIcon from './assets/images/search-icon.svg';
+import searchIcon from '../assets/images/search-icon.svg';
 function Search() {
     return ( 
         <div className="search-content">

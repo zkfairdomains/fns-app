@@ -4,9 +4,8 @@ function Footer() {
             <div className="container-fluid d-flex justify-content-between align-items-center">
             <div className="footNav">
                 <ul className="d-flex">
-                    <li><a href="">Terms</a></li>
-                    <li><a href="">Privacy</a></li>
-                    <li><a href="">Zkfair.io</a></li>
+                    <li><a href="/terms">Terms</a></li>
+                    <li><a href="/privacy">Privacy</a></li>
                 </ul>
             </div>
             <div className="socialMedia">

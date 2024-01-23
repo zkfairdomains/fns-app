@@ -1,12 +1,12 @@
-import Banner from "./Banner"
-import Search from "./Search";
+import Banner from "../partials/Banner"
+import Search from "../partials/Search";
+
 function Home() {
     return ( 
         <div className="centercontent">
             <Banner />
             <Search />
-        </div>
-        
+        </div> 
      );
 }
 
