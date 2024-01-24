@@ -2,7 +2,7 @@
 const NotFound = () => {
     return (
         <>  
-         <p>
+         <p className="text-white">
             The page you were looking for does not exists.
          </p>
       </>

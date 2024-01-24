@@ -1,6 +1,7 @@
 import twittericon from '../assets/images/twitter.svg' ;
 import githubicon from '../assets/images/githublogo.svg' ;
 import discordicon from '../assets/images/discordicon.svg' ;
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return ( 
@@ -8,8 +9,8 @@ function Footer() {
             <div className="container-fluid d-flex justify-content-between align-items-center">
             <div className="footNav">
                 <ul className="d-flex">
-                    <li><a href="/terms">Terms</a></li>
-                    <li><a href="/privacy">Privacy</a></li>
+                    <li><Link to="/terms">Terms</Link></li>
+                    <li><Link to="/privacy">Privacy</Link></li>
                 </ul>
             </div>
             <div className="socialMedia">

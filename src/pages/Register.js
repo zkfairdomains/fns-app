@@ -2,21 +2,19 @@ import React from "react";
 import Search from "../partials/Search";
 import AccordionBt from '../partials/AccordionBt';
 import TabsBt from '../partials/TabsBt';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Connectwalletbutton from "../partials/Connectwalletbutton";
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-const Page = () => { 
+const Register = () => { 
   return (
     <> 
       <div className="centercontent">
             <Search />
-            <AccordionBt />
-            <TabsBt />
-            <Connectwalletbutton />
-        </div>
-        
+            <p className="text-white">
+              This is register page.
+            </p>
+        </div> 
     </>
   )
 };
 
-export default Page;
+export default Register;
