@@ -7,9 +7,11 @@ import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { isValidDomain } from "../helpers/String";
+import DomainPrice from '../components/DomainPrice';
 
 function Search() {
   
+    const yearInSeconds = 31556926; 
     const inputRef = useRef("")
     const [name, setName] = useState(""); 
     const [valid, setValid] = useState(false); 
@@ -37,7 +39,7 @@ function Search() {
         functionName: 'available',
         args: [name],
         onError: (err) => { console.error(err) }
-    });   
+    });
  
     if(error) toast.error(error.message)
  
@@ -60,14 +62,14 @@ function Search() {
                 </>
                 : <></>
             }
-            {name != "" && valid ? 
+            {name != "" && valid && !isPending ? 
                 <> 
                 <div className="search-result-content">
                     <ul>
                         <li className="copy-container">
                             <span className="copy-text w-100">{name}.zkf </span>
                             <div className='w-50 d-flex justify-content-end'> 
-                                <span className='me-3'>{available ? "4$/year": ""}</span>
+                                <DomainPrice available={available} name={name} duration={yearInSeconds} />
                                 <button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
                             </div>
                         </li>
