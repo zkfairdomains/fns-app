@@ -1,4 +1,3 @@
-import Logo from '../assets/images/zkfair.svg';
 function Banner() {
     return ( 
         <div className="banner w-100 d-flex justify-content-center">
