@@ -17,7 +17,7 @@ function Footer() {
                 <ul className='d-flex'>
                     <li><a href="https://twitter.com/zkfdomains " target="_blank"><img src={twittericon} alt="Tiwtter x" title="Tiwtter x" /></a></li>
                     <li className='ms-3 me-3'><a href="https://github.com/zkfdomains" target="_blank"><img src={githubicon} alt="Github" title="Github" /></a></li>
-                    <li><a href=""><img src={discordicon} alt="Discord" title="Discord" /></a></li>
+                    <li><a href="#"><img src={discordicon} alt="Discord" title="Discord" /></a></li>
                 </ul>
             </div>
             </div>
