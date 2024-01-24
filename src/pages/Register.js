@@ -1,7 +1,8 @@
 import React from "react";
 import Search from "../partials/Search";
-import Accordion from '../partials/Accordion';
-import Tabs from '../partials/Tabs';
+import AccordionBt from '../partials/AccordionBt';
+import TabsBt from '../partials/TabsBt';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Connectwalletbutton from "../partials/Connectwalletbutton";
 
 const Page = () => { 
@@ -9,8 +10,8 @@ const Page = () => {
     <> 
       <div className="centercontent">
             <Search />
-            <Accordion />
-            <Tabs />
+            <AccordionBt />
+            <TabsBt />
             <Connectwalletbutton />
         </div>
         
