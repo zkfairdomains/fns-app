@@ -74,8 +74,13 @@ ul{padding-left: 0 !important;}
  .nav-tabs li:last-child .nav-link{border-left:1px solid #000 !important;} 
 
 .nav-link.active,.nav-link:hover{color:#e13022 !important;border:none !important}
-
-
+#ethscan{background-color: #e13022;}
+.imgwhiteredbg{background-color: #e13022;display: block;display: flex;justify-content: center;align-items: center;padding: 3px;}
+.imgwhite{
+  filter: brightness(0) invert(1);
+  width: 24px !important;
+  display: block;
+}
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 @keyframes change-color-warning {
