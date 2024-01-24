@@ -48,7 +48,7 @@ function Search() {
                 <span className='chainText'>.zkf</span>
                 <button onClick={(e)=> handleSearch(e) }>{isPending ? <><img src={loadericon} /></> : "SEARCH" }</button>
             </form>
-            { !valid ?
+            { name != "" & !valid ?
                 <>
                 <div className="search-result-content">
                     <ul>
