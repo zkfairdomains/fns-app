@@ -11,32 +11,30 @@ import Notfound from "./pages/Notfound";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Register from "./pages/Register";
+import Account from "./pages/Account";
+import Favorites from "./pages/Favorites";
 import { Web3Modal } from './components/Web3Modal';
+import Layouts from "./layouts";    
 
 function App() {
   return (
     <Web3Modal>
-    <div>
-      <main>
-        <Header />
-        <section>
-          <div className='container-fluid'>  
-              <BrowserRouter forceRefresh={true}>
-                <Routes>  
-                  <Route index element={<Home />} />
-                  <Route path="/register" element={<Register />} />                
-                  <Route path="/terms" element={<Terms />} /> 
-                  <Route path="/privacy" element={<Privacy />} />
-                  <Route path="/404" element={<Notfound />} />  
-                  <Route path="*" element={<Navigate replace={true} to="/404" />} />
-                </Routes>
-              </BrowserRouter>
-              <ToastContainer position="bottom-right" autoClose={1000} hideProgressBar={false} theme="light"></ToastContainer>
-          </div>
-        </section>
-      </main>
-      <Footer/>
-    </div>
+      <BrowserRouter forceRefresh={true}>
+            <Routes>  
+              <Route path='/' element={<Layouts.Home />}>
+                <Route index element={<Home />}  />
+              </Route>
+              <Route path="/" element={<Layouts.Page />}>
+                <Route path="/account" element={<Account />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/terms" element={<Terms />} /> 
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/404" element={<Notfound />} />  
+                <Route path="*" element={<Navigate replace={true} to="/404" />} />
+              </Route>
+            </Routes> 
+      </BrowserRouter>
     </Web3Modal>
   );
 }

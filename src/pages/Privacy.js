@@ -1,14 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";  
 
-const Page = () => { 
+const Privacy = () => { 
   return (
     <> 
-      <div className="container-fluid">
-        Privacy Page
-      </div>
+      <p className="text-white">
+        This is Privacy page.
+      </p>
     </>
   )
 };
 
-export default Page;
+export default Privacy;

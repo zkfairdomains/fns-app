@@ -4,16 +4,28 @@ import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
 
 import { useReadContract } from 'wagmi'
 import { useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+
+import { isValidDomain } from "../helpers/String";
 
 function Search() {
- 
-    // en az 2 karakter
-    // bosluk olmayacak.
-
-
+  
     const inputRef = useRef("")
-    const [name, setName] = useState("");
-    const [isAvailable, setIsAvailable] = useState(false);
+    const [name, setName] = useState(""); 
+    const [valid, setValid] = useState(false); 
+
+    function handleSearch(e) {
+        e.preventDefault();
+         
+        if(isValidDomain(inputRef.current.value)) {
+            setValid(true);
+            setName(inputRef.current.value);
+        } else {
+            
+            setValid(false);
+            setName(inputRef.current.value);
+        }
+    } 
 
     const zkfRegisterControllerConfig = {
         address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
@@ -26,36 +38,42 @@ function Search() {
         args: [name],
         onError: (err) => { console.error(err) }
     });   
-
-    if (error) {
-        return (
-            <div>
-                Error: {error.message}
-            </div>
-        )
-    }
-         console.log(isPending)
+ 
+    if(error) toast.error(error.message)
+ 
     return ( 
-        <div className="search-content">
-            { isPending ? "Loading": ""}
+        <div className="search-content"> 
             <form onSubmit={(e)=> { e.preventDefault(); return false; }}>
                 <img src={searchIcon} alt="" /><input type="text" ref={inputRef} placeholder="Search your domain name" />
                 <span className='chainText'>.zkf</span>
-                <button onClick={(e)=> setName(inputRef.current.value) }>{isPending ? <><img src={loadericon} /></> : "SEARCH" }</button>
+                <button onClick={(e)=> handleSearch(e) }>{isPending ? <><img src={loadericon} /></> : "SEARCH" }</button>
             </form>
-            {name != "" ? <> 
-            <div className="search-result-content">
-                <ul>
-                    <li className="copy-container">
-                        <span className="copy-text w-100">{name}.zkf </span>
-                        <div className='w-50 d-flex justify-content-end'>
-                            
-                            <span className='me-3'>{available ? "4$/year": ""}</span>
-                            <button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
-                        </div>
+            { !valid ?
+                <>
+                <div className="search-result-content">
+                    <ul>
+                        <li className="copy-container">
+                            <span className='alert alert-danger container-fluid'>{name} is invalid!</span>
                         </li>
-                </ul>
-            </div></>
+                    </ul>
+                </div>
+                </>
+                : <></>
+            }
+            {name != "" && valid ? 
+                <> 
+                <div className="search-result-content">
+                    <ul>
+                        <li className="copy-container">
+                            <span className="copy-text w-100">{name}.zkf </span>
+                            <div className='w-50 d-flex justify-content-end'> 
+                                <span className='me-3'>{available ? "4$/year": ""}</span>
+                                <button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </>
             : <></>
             }
         </div>

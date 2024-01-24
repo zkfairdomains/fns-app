@@ -1,14 +1,13 @@
-import React from "react";
-import { Outlet } from "react-router-dom";  
+import React from "react"; 
 
-const Page = () => { 
+const Terms = () => { 
   return (
     <> 
-      <div className="container-fluid">
-        Terms Page
-      </div>
+       <p className="text-white">
+              This is register page.
+        </p>
     </>
   )
 };
 
-export default Page;
+export default Terms;

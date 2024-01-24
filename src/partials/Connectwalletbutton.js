@@ -5,7 +5,7 @@ import { useWeb3Modal } from '@web3modal/wagmi/react'
 import { obscureAddress } from "../helpers/String";
 import { useChainId } from 'wagmi'
 
-export default function Connectwalletbutton() {
+export default function ConnectWalletButton() {
 
   const { open, close } = useWeb3Modal()
   const { address, isConnected  } = useAccount() 
