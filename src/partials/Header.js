@@ -10,12 +10,13 @@ function Header() {
                 <nav>
                     <ul className="d-flex">
                         <li><a href="/account">My Domains</a></li>
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/register">Favorites</a></li>
                         <li className="dropdown d-none">
                         <a className="d-block w-100 h-100 dropdown-toggle" href="javascript:;"><span class="tripledot"><em></em><em> </em><em></em></span></a>
                         <ul className="dropdown-menu">
                             <li><a href="">favorites</a></li>
-                            <li><a href="">star</a></li>
-                            <li><a href="">blog</a></li>
+                           
                         </ul>
                         </li>
                     </ul>
