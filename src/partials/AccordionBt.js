@@ -6,7 +6,7 @@ function AccordionBt() {
       <Accordion.Item eventKey="0">
         <Accordion.Header>Reverse record</Accordion.Header>
         <Accordion.Body>
-            <ul>
+            <ul className='itemlist'>
                 <li className="copy-container"><span className="copy-text">Domain 1</span><span>Status: <em className='color-green'>Active</em></span><button className="red">Click for passive</button></li>
                 <li className="copy-container"><span className="copy-text">Domain 2</span><span>Status: <em className='color-red'>Passive</em></span><button className="green">Click for active</button></li>
                 <li className="copy-container"><span className="copy-text">Domain 3</span><span>Status: <em className='color-green'>Active</em></span><button className="red">Click for passive</button></li>
