@@ -1,7 +1,7 @@
 import { createWeb3Modal } from '@web3modal/wagmi/react'
 
 import { http, createConfig, WagmiProvider } from 'wagmi'
-import { mainnet, goerli } from 'wagmi/chains'
+import { mainnet, goerli, zkFair } from 'wagmi/chains'
 import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -15,13 +15,14 @@ const metadata = {
   description: ''
 }
 
-const chains = [mainnet, goerli]
+let chains = [mainnet, goerli, zkFair];
 
 const wagmiConfig = createConfig({
   chains: chains,
-  transports: {
+  transports: { 
     [mainnet.id]: http(),
-    [goerli.id]: http()
+    [goerli.id]: http(),
+    [zkFair.id]: http(),
   },
   connectors: [
     walletConnect({ projectId, metadata, showQrModal: true }),
@@ -30,8 +31,8 @@ const wagmiConfig = createConfig({
       appName: metadata.name
     })
   ]
-})
-
+});
+ 
  
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
