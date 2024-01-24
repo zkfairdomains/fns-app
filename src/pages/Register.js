@@ -2,7 +2,7 @@ import React from "react";
 import Search from "../partials/Search";
 import Accordion from '../partials/Accordion';
 import Tabs from '../partials/Tabs';
-import Connectwalletbutton from "../partials/ConnectWalletButton";
+import Connectwalletbutton from "../partials/Connectwalletbutton";
 
 const Page = () => { 
   return (
