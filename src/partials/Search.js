@@ -10,11 +10,7 @@ function Search() {
                 <button>SEARCH</button>
             </form>
             <div className="search-result-content">
-            <ul>
-                <li className="copy-container"><span className="copy-text">search result 1</span><button className="green">Avaible</button></li>
-                <li className="copy-container"><span className="copy-text">search result 2</span><button className="red" disabled="disabled">Not Avaible</button></li>
-                <li className="copy-container"><span className="copy-text">search result 3</span><button className="green">Avaible</button></li>
-            </ul>
+             
             </div>
         </div>
      );
