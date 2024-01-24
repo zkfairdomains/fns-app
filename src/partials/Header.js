@@ -1,6 +1,6 @@
 import Logo from '../assets/images/zkfair.svg';
 import MetaMaskLogo from '../assets/images/metamask.svg';
-import Connectwalletbutton from './ConnectWalletButton';
+import Connectwalletbutton from './Connectwalletbutton';
 function Header() {
     return ( 
         <header>
