@@ -8,10 +8,7 @@ function Search() {
                     <option value="zkfair">.zkf</option>
                 </select>
                 <button>SEARCH</button>
-            </form>
-            <div className="search-result-content">
-             
-            </div>
+            </form> 
         </div>
      );
 }
