@@ -1,6 +1,6 @@
 import * as React from "react";
 import Logo from '../assets/images/zkfair.svg'; 
-import ConnectWalletButton from "./Connectwalletbutton"; 
+import ConnectWalletButton from "./ConnectWalletButton"; 
 import { Link, NavLink } from 'react-router-dom';
 
 function Header() {

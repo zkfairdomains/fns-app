@@ -11,6 +11,7 @@ import Notfound from "./pages/Notfound";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Register from "./pages/Register";
+import Name from "./pages/Name";
 import Account from "./pages/Account";
 import Favorites from "./pages/Favorites";
 import { Web3Modal } from './components/Web3Modal';
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/account" element={<Account />} />
                 <Route path="/favorites" element={<Favorites />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/name/:name.zkf" element={<Name />} />
                 <Route path="/terms" element={<Terms />} /> 
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/404" element={<Notfound />} />  

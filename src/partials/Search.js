@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 import { isValidDomain } from "../helpers/String";
 import DomainPrice from '../components/DomainPrice';
+import { Link } from 'react-router-dom';
 
 function Search() {
   
@@ -70,7 +71,7 @@ function Search() {
                             <span className="copy-text w-100">{name}.zkf </span>
                             <div className='w-50 d-flex justify-content-end'> 
                                 <DomainPrice available={available} name={name} duration={yearInSeconds} />
-                                <button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
+                                <Link to={"/name/"+ name + ".zkf"}><button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button></Link>
                             </div>
                         </li>
                     </ul>
