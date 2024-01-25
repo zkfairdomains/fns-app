@@ -10,7 +10,18 @@ import { isValidDomain } from "../helpers/String";
 import DomainPrice from '../components/DomainPrice';
 
 function Search() {
-  
+    
+    
+    const handleMouseEvent = (e) => {
+        e.persist();
+        e.target.style.backgroundColor = "orange";
+        console.log('1111');
+        setTimeout(() => {
+            console.log('2222')
+        e.target.style.backgroundColor = "";
+        }, 1000);
+    };
+
     const yearInSeconds = 31556926; 
     const inputRef = useRef("")
     const [name, setName] = useState(""); 
@@ -52,7 +63,7 @@ function Search() {
             </form>
             { name != "" & !valid ?
                 <>
-                <div className="search-result-content">
+                <div className="search-result-content" onMouseLeave={(e)=> handleMouseEvent(e)}>
                     <ul>
                         <li className="copy-container">
                             <span className='alert alert-danger container-fluid'>{name} is invalid!</span>
@@ -67,11 +78,11 @@ function Search() {
                 <div className="search-result-content">
                     <ul>
                         <li className="copy-container">
-                            <span className="copy-text w-50">{name}.zkf </span>
-                            <div className='w-25'>
+                            <span className="domainName ">{name}.zkf </span>
+                            <div className='pricing'>
                                 <DomainPrice available={available} name={name} duration={yearInSeconds} />
                             </div>
-                            <div className='resultbutton w-25 d-flex justify-content-end'> 
+                            <div className='resultbutton d-flex justify-content-end'> 
                                 <button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
                             </div>
                         </li>

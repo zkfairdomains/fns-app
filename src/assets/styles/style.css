@@ -5713,6 +5713,7 @@ header h1 {
 header h1 img {
     width: 100%;
     display: block;
+    margin-top: 4px;
 }
 @media (max-width: 768px) {
     header {
@@ -5874,14 +5875,18 @@ header .mm.active span:last-child {
 .controls-content {
     height: auto;
 }
+
 @media (max-width: 768px) {
+  header{position: relative;}
+  header nav{background-color: #000;}
+    body.menuOn header{z-index: 8888;}
     .controls-content {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
-        overflow: hidden;
-        visibility: visible;
-        opacity: 1;
+        /* overflow: hidden; */
+        visibility: hidden;
+        opacity: 0;
         transition: 1s;
         -webkit-transition: 1s;
         position: absolute;
@@ -5942,17 +5947,39 @@ header .mm.active span:last-child {
 footer {
     padding: 15px;
 }
+
 footer > div{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.footerRight{
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.footerRight button{
+  background-color: transparent;
+  color:#fff;
+  padding: 0 14px;
+  margin-right: 15px;
+  border:1px solid #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.footerRight button img{
+  max-width: 20px;
+}
 @media(max-width:768px){
   footer > div{
-    flex-wrap:wrap
+    flex-wrap:wrap;align-items: flex-start;
   }
   
-  .footNav,.footNav + div{width: 50%;}
+  
+  .footNav,.footNav + div{width: 100%;}
   .socialMedia{width: 100%;display: flex;justify-content: center;padding: 20px 0;}
 }
 footer .footNav ul li {
@@ -6118,10 +6145,17 @@ main section .banner-bg {
     flex-wrap: wrap;
   }
   .search-content .search-result-content ul li > div, .accordion ul li > div, .itemlist li > div{
-    width: 100% !important;
-    justify-content: center !important;
+    width: auto !important;
   }
+  .search-content .search-result-content ul li > div.resultbutton, .accordion ul li > div.resultbutton, .itemlist li > div.resultbutton{
+    width: 100% !important;
+    margin-top: 10px;
+  }
+  
+  div.resultbutton button{width: 100%;}
+  .itemlist .w-25{}
 }
+
 
 .search-content .search-result-content ul,
 .accordion ul,
@@ -6428,6 +6462,18 @@ ul {
     padding-left: 10px !important;
     padding-right: 10px !important;
 }
+
+
+/*search result inner sizing*/
+.domainName {width: 100%;}
+.pricing{width: 30%;}
+.resultbutton{width: 30%;}
+@media(max-width:768px){
+  .domainName{width: 50%;}
+  .pricing{width: 50%;}
+.resultbutton{width: 100%;}
+}
+/*search result inner sizing*/
 
 .tab-outer {
     width: 80%;

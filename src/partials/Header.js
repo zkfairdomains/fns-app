@@ -1,6 +1,6 @@
 import * as React from "react";
-import Logo from '../assets/images/zkfair.svg'; 
-import ConnectWalletButton from "./ConnectWalletButton"; 
+import Logo from '../assets/images/zfknameservice-logo.svg'; 
+import ConnectWalletButton from "./Connectwalletbutton"; 
 import { Link, NavLink } from 'react-router-dom';
 import { useRef } from "react";
 
@@ -34,6 +34,7 @@ function Header() {
             <div className="controls-content">
                 <nav>
                     <ul className="d-flex">
+                        <li><Link to="/">Home</Link></li>
                         <li><Link to="/register">My Domains</Link></li>
                         <li><Link to="/favorites">Favorites</Link></li>
                         <li className="dropdown d-none">
