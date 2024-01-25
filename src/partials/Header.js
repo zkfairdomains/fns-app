@@ -4,11 +4,28 @@ import ConnectWalletButton from "./Connectwalletbutton";
 import { Link, NavLink } from 'react-router-dom';
 
 function Header() {
+
+    function mmFunction(){
+        var menuIcon = document.querySelector('.mm');
+        var bodytag = document.getElementsByTagName("body")
+        var controlsContent = document.querySelector('.controls-content');
+        menuIcon.addEventListener('click', function () {
+            if (menuIcon.classList.contains("active")) {
+                bodytag.classList.remove('menuOn');
+                menuIcon.classList.remove('active');
+                controlsContent.classList.remove('active');
+            } else {
+                bodytag.classList.add('menuOn');
+                menuIcon.classList.add('active');
+                controlsContent.classList.add('active');
+            }
+    });
+    }
     return ( 
         <header>
             <div className="container-fluid d-flex align-items-center justify-content-between">
             <NavLink to="/">
-                <h1 id="logo"><img src={Logo} alt="" /></h1>
+                <h1 id="logo"><a href="/home"><img src={Logo} alt="Zkfair Domains" /></a></h1>
             </NavLink>
             <div className="controls-content">
                 <nav>
@@ -28,6 +45,7 @@ function Header() {
                 </div>
             </div>
              <ConnectWalletButton></ConnectWalletButton>
+             <a onClick={mmFunction()}  class="mm" href="javascript:;"><span></span><span> </span><span></span></a>
             </div> 
         </header>
         

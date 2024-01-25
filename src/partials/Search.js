@@ -67,9 +67,11 @@ function Search() {
                 <div className="search-result-content">
                     <ul>
                         <li className="copy-container">
-                            <span className="copy-text w-100">{name}.zkf </span>
-                            <div className='w-50 d-flex justify-content-end'> 
+                            <span className="copy-text w-50">{name}.zkf </span>
+                            <div className='w-25'>
                                 <DomainPrice available={available} name={name} duration={yearInSeconds} />
+                            </div>
+                            <div className='resultbutton w-25 d-flex justify-content-end'> 
                                 <button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
                             </div>
                         </li>
