@@ -21,7 +21,8 @@ function DomainPrice({available, name, duration}) {
     });
  
     if(error) toast.error(error.message)
-  
+    if(!available) return <></>
+
     if(isPending) {
         <span className='me-3'>...</span>
     } else {
