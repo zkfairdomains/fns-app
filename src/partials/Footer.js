@@ -2,11 +2,13 @@ import twittericon from '../assets/images/twitter.svg' ;
 import githubicon from '../assets/images/githublogo.svg' ;
 import discordicon from '../assets/images/discordicon.svg' ;
 import etherscann from '../assets/images/etherscan-logo.png' ;
-import { switchChain } from 'viem/actions';
+import { useSwitchChain } from 'wagmi';
 
 import { Link } from 'react-router-dom';
 
 function Footer() {
+    const { switchChain } = useSwitchChain() 
+
     return ( 
         <footer className="w-100">
             <div className="container-fluid">
@@ -17,7 +19,7 @@ function Footer() {
                 </ul>
             </div>
             <div>
-            <button className="wallet-connect" onClick={() => switchChain({ chainId: process.env.REACT_APP_SUPPORTED_CHAIN_ID }) }>Add to Metamask</button>
+            <button className="wallet-connect" onClick={() => switchChain({ chainId: Number(process.env.REACT_APP_SUPPORTED_CHAIN_ID) }) }>Add to Metamask</button>
             </div>
             <div className="socialMedia">
             <ul className='d-flex'>

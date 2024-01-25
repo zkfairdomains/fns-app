@@ -1,25 +1,29 @@
 import * as React from "react";
 import Logo from '../assets/images/zkfair.svg'; 
-import ConnectWalletButton from "./Connectwalletbutton"; 
+import ConnectWalletButton from "./ConnectWalletButton"; 
 import { Link, NavLink } from 'react-router-dom';
+import { useRef } from "react";
 
 function Header() {
 
-    function mmFunction(){
-        var menuIcon = document.querySelector('.mm');
+    //const menuRef = useRef();
+
+    function openMobilMenu(e) {
+        
+        var menuIcon = document.getElementsByClassName("mm");
         var bodytag = document.getElementsByTagName("body")
-        var controlsContent = document.querySelector('.controls-content');
-        menuIcon.addEventListener('click', function () {
-            if (menuIcon.classList.contains("active")) {
-                bodytag.classList.remove('menuOn');
-                menuIcon.classList.remove('active');
-                controlsContent.classList.remove('active');
-            } else {
-                bodytag.classList.add('menuOn');
-                menuIcon.classList.add('active');
-                controlsContent.classList.add('active');
-            }
-    });
+        var controlsContent = document.getElementsByClassName('controls-content');
+ 
+        if (menuIcon[0].className.indexOf("active") != -1) {
+            bodytag[0].classList.remove('menuOn');
+            menuIcon[0].classList.remove('active');
+            controlsContent[0].classList.remove('active');
+        } else {
+            bodytag[0].classList.add('menuOn');
+            menuIcon[0].classList.add('active');
+            controlsContent[0].classList.add('active');
+        }
+    
     }
     return ( 
         <header>
@@ -45,7 +49,7 @@ function Header() {
                 </div>
             </div>
              <ConnectWalletButton></ConnectWalletButton>
-             <a onClick={mmFunction()}  class="mm" href="javascript:;"><span></span><span> </span><span></span></a>
+             <a onClick={ (e)=> openMobilMenu(e) }  class="mm" href="javascript:;"><span></span><span> </span><span></span></a>
             </div> 
         </header>
         
