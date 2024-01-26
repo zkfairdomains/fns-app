@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import CustomCounter from "../partials/Customcounter";
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+import { getExpires, getTimeAgo } from "../helpers/String";
 
 class CommitButton extends Component {
     
@@ -196,6 +196,7 @@ class CommitButton extends Component {
     } 
 
     async handleQuery() {
+        console.log("handleQuery")
         try {
             let labelName = this.props.name;
             const result = await apolloClient.query( {
@@ -203,9 +204,7 @@ class CommitButton extends Component {
                 variables: {
                     labelName
                 }
-            });
-
-            console.log(result.data.domains[0] );
+            }); 
 
             this.setState({ domain: result.data.domains[0] })
         } catch(e) {
@@ -222,6 +221,10 @@ class CommitButton extends Component {
         if(this.state.commitment === null && !this.state.isMakingCommitment) {
             this.makeCommitment(); 
         }
+
+        if(!this.state.available) {
+            this.handleQuery(); 
+        }
     }
 
     componentDidUpdate(prevProps, prevState) { 
@@ -229,11 +232,7 @@ class CommitButton extends Component {
         if(prevProps.name != this.props.name) {
             this.handleAvailable();
             this.makeCommitment(); 
-        }
-
-        if(prevProps.available == false) {
-            this.handleQuery();
-        }
+        } 
     }
  
     render() {  
@@ -261,9 +260,46 @@ class CommitButton extends Component {
                 </div>
             }  
 
+            {this.state.available == false && this.state.domain ? 
+                <>
+                    <table className="text-white container">
+                        <tbody>
+                            <tr>
+                                <td>Owner</td>
+                                <td>{this.state.domain.owner.id} {this.state.domain.owner.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
+                            </tr>
+                            <tr>
+                                <td>Registrant</td>
+                                <td>{this.state.domain.registrant.id} {this.state.domain.registrant.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
+                            </tr>
+                            <tr>
+                                <td>Expires</td>
+                                <td>{getExpires(this.state.domain.expiryDate)}</td>
+                            </tr>
+                            <tr>
+                                <td>Created</td>
+                                <td>{getTimeAgo(this.state.domain.createdAt)}</td>
+                            </tr>
+                            <tr>
+                                <td>Registered</td>
+                                <td>{getTimeAgo(this.state.domain.registeredAt)}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </>
+                : <> </>
+            }
+
             {this.state.available ? 
                 <div className="container">
                     <div className="white-content d-flex flex-column justify-content-center countdowncontent">
+                        
+                    <div className="customCounter">
+                        <span onClick={countDown} className="countminus">-</span>
+                        <div><small className="me-3">{counter}</small> year</div>
+                        <span onClick={countUp} className="countplus">+</span>
+                    </div>
+                    
                     {this.state.commitment == null ? 
                         <>
                         <button className="btn btn-danger  align-self-center">
@@ -274,7 +310,7 @@ class CommitButton extends Component {
                             { !this.state.isCommitted && !this.state.isCommitmentExists ? 
                                 
                                 <>
-                                    <CustomCounter />
+
                                     <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
                                         {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
                                     </button>
