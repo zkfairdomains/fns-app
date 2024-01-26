@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 class CommitButton extends Component {
  
@@ -38,7 +39,8 @@ class CommitButton extends Component {
          isCommitmentExists: false,
          isRegistered: false,
          isMakingCommitment: false,
-         domain: null
+         domain: null,
+         isTimerCompleted: false
       };
     }
 
@@ -271,8 +273,19 @@ class CommitButton extends Component {
                                     
                                 </> : 
                                 <>
-                                    
-                                    <button disabled={this.state.isRegistring ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleRegister() }>
+                                    <CountdownCircleTimer
+                                            size={48}
+                                            strokeWidth={3}
+                                            isPlaying
+                                            duration={Number(process.env.REACT_APP_MINCOMMITMENTAGE)} 
+                                            colors={['#239e01', '#2ece02', '#e5ed07', '#bf0505']}
+                                            colorsTime={[7, 5, 2, 0]}
+                                            onComplete={()=> this.setState({ isTimerCompleted: true })}
+                                            >
+                                            {({ remainingTime }) => remainingTime}
+                                    </CountdownCircleTimer> 
+
+                                    <button disabled={this.state.isRegistring || !this.state.isTimerCompleted ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleRegister() }>
                                         {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>Register</>} 
                                     </button>
                                 </>
@@ -284,7 +297,7 @@ class CommitButton extends Component {
                 : 
                 <> </>
             }
- 
+
             {this.state.isRegistered ? 
                 <>
                     <Modal 
