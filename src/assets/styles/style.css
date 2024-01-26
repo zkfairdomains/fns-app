@@ -2,10 +2,10 @@
 #root > div{width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;flex-direction: column;}
 */
 #root,
-#root > div {
+#root > div:not(.Toastify) {
     min-height: 100%;
 }
-#root > div {
+#root > div:not(.Toastify) {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -6113,11 +6113,7 @@ main section .banner-bg {
     z-index: 88;
     flex-direction: column;
 }
-@media (max-width: 768px) {
-    .search-content {
-        width: 96%;
-    }
-}
+
 .search-content form {
     width: 100%;
     height: 60px;
@@ -6279,9 +6275,7 @@ main section .banner-bg {
     margin-top: 30px;
 }
 @media (max-width: 768px) {
-    .accordion {
-        width: 96%;
-    }
+   
 }
 .accordion .accItem {
     background-color: #fff;
@@ -6368,11 +6362,7 @@ button.cancel {
 .tab-content {
     width: 100%;
 }
-@media (max-width: 768px) {
-    .tab-content {
-        max-width: 96%;
-    }
-}
+
 .tab-content .tab-nav {
     display: flex;
     justify-content: center;
@@ -6503,7 +6493,7 @@ ul {
 @media(max-width:768px){
   .domainName{width: 50%;}
   .pricing{width: 50%;}
-.resultbutton{width: 100%;}
+.resultbutton,.resultbutton a{width: 100%;}
 }
 /*search result inner sizing*/
 
@@ -6603,3 +6593,8 @@ ul {
 
 
 .white-content{background-color:#fff ;border-radius: 4px;padding: 20px;}
+.countdowncontent{display: flex;justify-content: center;align-items: center;flex-direction: column;}
+.countdowncontent > div{display: flex;align-self: center;justify-self: center;margin-bottom: 10px;}
+
+
+.Toastify{z-index: 9999;}

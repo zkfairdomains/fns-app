@@ -239,27 +239,31 @@ class CommitButton extends Component {
             <> 
             {this.state.isAvailablePending ? 
                 <> 
-                    <div className="alert alert-info text-center container mt-3">
-                        <h3> Searching...</h3>
+                    <div className="container mt-3">
+                        <div className="alert alert-info text-center">
+                            <h3> Searching...</h3>
+                        </div>
+                        
                     </div>
                 </>
                 : 
-                <> 
-                    <div className={this.state.available ? "alert alert-success text-center container mt-3": "alert alert-danger text-center container mt-3" }>
+                <div className="container mt-3"> 
+                    <div className={this.state.available ? "alert alert-success text-center": "alert alert-danger text-center" }>
                         <h3>  
                             <>
                                 { this.state.available ? <> <b>{this.props.name}.zkf</b> is available to claim 🥳 </>: <><b>{this.props.name}.zkf</b> is not available to claim 🙁</>}
                             </> 
                         </h3>
                     </div>
-                </>
+                </div>
             }  
 
             {this.state.available ? 
-                <>
+                <div className="container">
+                    <div className="white-content d-flex flex-column justify-content-center countdowncontent">
                     {this.state.commitment == null ? 
                         <>
-                        <button className="btn btn-danger">
+                        <button className="btn btn-danger  align-self-center">
                             <img width={25} src={spinner} /> Checking...
                         </button>
                         </> : 
@@ -273,27 +277,28 @@ class CommitButton extends Component {
                                     
                                 </> : 
                                 <>
-                                    <CountdownCircleTimer
+                                    <CountdownCircleTimer 
                                             size={48}
                                             strokeWidth={3}
                                             isPlaying
                                             duration={Number(process.env.REACT_APP_MINCOMMITMENTAGE)} 
-                                            colors={['#239e01', '#2ece02', '#e5ed07', '#bf0505']}
+                                            colors={['#239e01', '#2ece02', '#e5ed07', '#e13022']}
                                             colorsTime={[7, 5, 2, 0]}
                                             onComplete={()=> this.setState({ isTimerCompleted: true })}
                                             >
                                             {({ remainingTime }) => remainingTime}
                                     </CountdownCircleTimer> 
 
-                                    <button disabled={this.state.isRegistring || !this.state.isTimerCompleted ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleRegister() }>
+                                    <button disabled={this.state.isRegistring || !this.state.isTimerCompleted ? "disabled": ""} className="btn btn-danger align-self-center" onClick={(e)=> this.handleRegister() }>
                                         {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>Register</>} 
                                     </button>
                                 </>
                             }
-                            <span className="text-white mt-2">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
+                            <span className="mt-2 text-center f-25">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
                         </>
                     }
-                </>
+                </div>
+                </div>
                 : 
                 <> </>
             }
@@ -316,7 +321,7 @@ class CommitButton extends Component {
                                     See your domains on My Domains page.
                                 </p>
                                 <p>
-                                <Link className="btn btn-info btn-lg" to={"/account"}>Go to My Domains</Link>
+                                <Link className="btn btn-success btn-lg" to={"/account"}>Go to My Domains</Link>
                                 </p>
                             </Modal.Body>
                             <Modal.Footer>

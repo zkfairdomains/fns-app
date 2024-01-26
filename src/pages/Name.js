@@ -64,8 +64,8 @@ function Search({name}) {
     }
 
     return (
-        <>
-            <div className="search-content container p-0"> 
+        <div className="container">
+            <div className="search-content  "> 
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <img src={searchIcon} alt="" />
                     <input type="text" onChange={handleOnChange} value={_name} placeholder="Search your .zkf domain" />
@@ -73,7 +73,7 @@ function Search({name}) {
                     <button >SEARCH</button>
                 </form>
             </div>
-        </>
+        </div>
     )
 }
 
