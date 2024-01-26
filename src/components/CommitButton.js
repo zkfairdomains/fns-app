@@ -294,7 +294,7 @@ class CommitButton extends Component {
                                     </button>
                                 </>
                             }
-                            <span className="mt-2 text-center f-25">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
+                            <span className="mt-2 text-center">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
                         </>
                     }
                 </div>

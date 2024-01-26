@@ -6595,6 +6595,9 @@ ul {
 .white-content{background-color:#fff ;border-radius: 4px;padding: 20px;}
 .countdowncontent{display: flex;justify-content: center;align-items: center;flex-direction: column;}
 .countdowncontent > div{display: flex;align-self: center;justify-self: center;margin-bottom: 10px;}
-
-
+.countdowncontent > span{font-size: 24px;}
+@media(max-width:768px){
+    .countdowncontent > span{font-size: 18px;}
+    
+}
 .Toastify{z-index: 9999;}
