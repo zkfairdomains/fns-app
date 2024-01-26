@@ -312,7 +312,7 @@ class CommitButton extends Component {
 
             {this.state.available ? 
                 <div className="container">
-                    <div className="white-content d-flex flex-column justify-content-center countdowncontent">
+                    <div className="d-flex flex-column justify-content-center countdowncontent">
                         
                     
                     <div className="customCounter">
@@ -356,7 +356,7 @@ class CommitButton extends Component {
                             }
                         </>
                     }
-                    <span className="mt-2 text-center">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
+                    <span className="mt-2 text-center text-white">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
                 </div>
                 </div>
                 : 
