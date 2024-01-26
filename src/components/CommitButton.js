@@ -281,8 +281,8 @@ class CommitButton extends Component {
             }  
 
             {this.state.available == false && this.state.domain ? 
-                <>
-                    <table className="text-white container">
+                <div className="container tableContent">
+                    <table>
                         <tbody>
                             <tr>
                                 <td>Owner</td>
@@ -306,7 +306,7 @@ class CommitButton extends Component {
                             </tr>
                         </tbody>
                     </table>
-                </>
+                </div>
                 : <> </>
             }
 
