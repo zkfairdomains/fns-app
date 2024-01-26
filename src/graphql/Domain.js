@@ -24,3 +24,24 @@ export const GET_DOMAIN = gql`
         }
     }
 `;
+
+export const GET_MY_DOMAINS = gql`
+    query Domains( $owner: String ) {
+        domains ( 
+            orderBy: createdAt
+            orderDirection: desc
+            where: {
+                owner: $owner
+                labelName_not: null
+            }
+        )
+        {
+            id
+            name
+            labelName
+            registeredAt
+            createdAt
+            expiryDate 
+        }
+    }
+`;

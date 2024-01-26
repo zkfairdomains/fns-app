@@ -38,8 +38,7 @@ function Header() {
                 <nav>
                     <ul className="d-flex">
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/register">My Domains</Link></li>
-                        <li><Link to="/favorites">Favorites</Link></li>
+                        <li><Link to="/account">My Domains</Link></li>
                     </ul>
                 </nav>
                 <div className="network-select dropdown">
