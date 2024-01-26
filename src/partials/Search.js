@@ -63,7 +63,7 @@ function Search() {
             </form>
             { name != "" & !valid ?
                 <>
-                <div className="search-result-content" onMouseLeave={(e)=> handleMouseEvent(e)}>
+                <div className="search-result-content">
                     <ul>
                         <li className="copy-container">
                             <span className='alert alert-danger container-fluid'>{name} is invalid!</span>

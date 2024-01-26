@@ -23,13 +23,16 @@ function Header() {
             menuIcon[0].classList.add('active');
             controlsContent[0].classList.add('active');
         }
-    
+        return false;
     }
     return ( 
         <header>
             <div className="container-fluid d-flex align-items-center justify-content-between">
             <NavLink to="/">
-                <h1 id="logo"><a href="/home"><img src={Logo} alt="Zkfair Domains" /></a></h1>
+                <h1 id="logo">
+                        <img src={Logo} alt="Zkfair Name Services" />
+                        <span>Zkfair Domains</span>
+                </h1>
             </NavLink>
             <div className="controls-content">
                 <nav>
@@ -37,12 +40,6 @@ function Header() {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/register">My Domains</Link></li>
                         <li><Link to="/favorites">Favorites</Link></li>
-                        <li className="dropdown d-none">
-                            <a className="d-block w-100 h-100 dropdown-toggle" href="javascript:;"><span class="tripledot"><em></em><em> </em><em></em></span></a>
-                            <ul className="dropdown-menu">
-                                <li><a href="">favorites</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </nav>
                 <div className="network-select dropdown">
@@ -50,7 +47,7 @@ function Header() {
                 </div>
             </div>
              <ConnectWalletButton></ConnectWalletButton>
-             <a onClick={ (e)=> openMobilMenu(e) }  class="mm" href="javascript:;"><span></span><span> </span><span></span></a>
+             <a onClick={ (e)=> openMobilMenu(e) }  className="mm" href="#"><span></span><span> </span><span></span></a>
             </div> 
         </header>
         
