@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CustomCounter() {
+function CustomCounternew() {
     const [counter, setCounter] = useState(1);
  
     const countUp = () => {
@@ -24,4 +24,4 @@ function CustomCounter() {
      );
 }
 
-export default CustomCounter;
+export default CustomCounternew;

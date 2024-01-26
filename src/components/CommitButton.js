@@ -13,7 +13,7 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import CustomCounter from "../partials/Customcounter";
+import CustomCounternew from "../partials/CustomCounternew";
 
 class CommitButton extends Component {
     
@@ -274,7 +274,7 @@ class CommitButton extends Component {
                             { !this.state.isCommitted && !this.state.isCommitmentExists ? 
                                 
                                 <>
-                                    <CustomCounter />
+                                    <CustomCounternew />
                                     <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
                                         {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
                                     </button>
