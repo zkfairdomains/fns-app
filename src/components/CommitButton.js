@@ -12,10 +12,14 @@ import { Link } from "react-router-dom";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import CustomCounter from "../partials/Customcounter";
 
 class CommitButton extends Component {
- 
+    
+  
+
+
     resolver = process.env.REACT_APP_PUBLICRESOLVER;
     data =  [];
     reverseRecord = true;
@@ -43,7 +47,6 @@ class CommitButton extends Component {
          isTimerCompleted: false
       };
     }
-
     async makeCommitment() {
         console.log("make function")
  
@@ -154,7 +157,7 @@ class CommitButton extends Component {
 
             console.log(recepient);
 
-            toast.success("Your tx has been completed.");
+            toast.success("Your transaction has been completed.");
 
             this.setState({ isRegistring: false, isRegistered: true, available: false });
 
@@ -269,8 +272,9 @@ class CommitButton extends Component {
                         </> : 
                         <>
                             { !this.state.isCommitted && !this.state.isCommitmentExists ? 
+                                
                                 <>
-                                    
+                                    <CustomCounter />
                                     <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
                                         {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
                                     </button>
