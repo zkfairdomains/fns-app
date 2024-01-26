@@ -31,7 +31,7 @@ function Header() {
             <NavLink to="/">
                 <h1 id="logo">
                         <img src={Logo} alt="Zkfair Name Services" />
-                        <span>Zkfair Domains</span>
+                        <span>ZKFair Domains</span>
                 </h1>
             </NavLink>
             <div className="controls-content">

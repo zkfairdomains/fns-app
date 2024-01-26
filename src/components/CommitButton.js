@@ -1,11 +1,17 @@
 import { ethers, keccak256, parseEther } from "ethers";
-import { wagmiConfig } from "../config";
+import { apolloClient, wagmiConfig } from "../config";
 import { readContract, writeContract } from '@wagmi/core'
 import { toast } from "react-toastify";
 import React, {Component} from 'react';
 import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
 import { waitForTransactionReceipt } from '@wagmi/core'
 import spinner from '../assets/images/spinner.svg';
+import moment from "moment";
+import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
+import {  } from "@apollo/client";
+import { GET_DOMAIN } from "../graphql/Domain";
 
 class CommitButton extends Component {
  
@@ -13,7 +19,7 @@ class CommitButton extends Component {
     data =  [];
     reverseRecord = true;
 
-    minWait = process.env.REACT_APP_MINCOMMITMENTAGE; // inseconds
+    minWait = process.env.REACT_APP_MINCOMMITMENTAGE; 
     maxWait = process.env.REACT_APP_MAXCOMMITMENTAGE;
 
     constructor(props) {
@@ -28,21 +34,27 @@ class CommitButton extends Component {
          isRegistring: false,
          available: null,
          isAvailablePending: false,
-         isPrevCommitmentLoading: false
+         isPendingPrevCommitment: false,
+         isCommitmentExists: false,
+         isRegistered: false,
+         isMakingCommitment: false,
+         domain: null
       };
     }
 
     async makeCommitment() {
-        console.log("make")
+        console.log("make function")
  
         const random =  Math.floor(Math.random() * 1000);
         const secret = keccak256(ethers.toUtf8Bytes(random))
            
-        let commitment = null;
+        let _commitment = null; 
 
-        this.setState({ isCommitted: false, commitment: null, secret: null, isCommiting: false })
+        this.setState({ isMakingCommitment: true, isCommitted: false, commitment: null, secret: null, isCommiting: false });
+
         try {
-             commitment =  await readContract(wagmiConfig, {
+            
+            _commitment =  await readContract(wagmiConfig, {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "makeCommitment",
@@ -50,11 +62,33 @@ class CommitButton extends Component {
                 account: this.props.owner
             });
 
-            this.setState({ commitment: commitment });
-            this.setState({ secret: secret });
+            console.log("make: "+ _commitment)
+            
 
         } catch(e) {
             toast.error(e.message);
+        }
+
+        try {
+  
+            const result =  await readContract(wagmiConfig, {
+                abi: zkfRegisterControllerABI,
+                address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
+                functionName: "commitments",
+                args: [ _commitment ],
+                account: this.props.owner
+            });
+
+            console.log("result: "+ result);
+
+            if(result > 0 &&  Number(result) + this.maxWait >= moment().utc().unix() ) {
+                this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: true })
+            } else this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: false })
+
+        } catch (e) {
+
+            toast.error(e.message);
+
         }
     }
  
@@ -75,7 +109,7 @@ class CommitButton extends Component {
                 }
             });
 
-            toast.success("Your commit tx has been sent. Please wait your transaction to complete.");
+            toast.success("Your transaction has been sent.");
 
             console.log(_hash);
  
@@ -98,25 +132,21 @@ class CommitButton extends Component {
     }
 
     async handleRegister () { 
-        
-        const resolver = process.env.REACT_APP_PUBLICRESOLVER;
-        const data =  [];
-        const reverseRecord = true;
- 
+         
         try {
 
-            this.setState({ isRegistring: true });
+            this.setState({ isRegistring: true, isRegistered: false });
 
             const _hash = await writeContract(wagmiConfig, {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "register",
-                args: [ this.props.name, this.props.owner, this.props.duration, this.state.secret, resolver, data, reverseRecord ],
+                args: [ this.props.name, this.props.owner, this.props.duration, this.state.secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner,
                 value: parseEther("0.25")
             });
 
-            toast.success("Your commit tx has been sent. Please wait your transaction to complete.");
+            toast.success("Your transaction has been sent.");
 
             const recepient = await waitForTransactionReceipt(wagmiConfig, {  hash: _hash });
 
@@ -124,12 +154,11 @@ class CommitButton extends Component {
 
             toast.success("Your tx has been completed.");
 
-            this.setState({ isRegistring: false });
+            this.setState({ isRegistring: false, isRegistered: true, available: false });
 
         } catch(e) {
-            console.log(e);
             toast.error(e.message);
-            this.setState({ isRegistring: false });
+            this.setState({ isRegistring: false, isRegistered: false });
         } 
     }
 
@@ -150,8 +179,6 @@ class CommitButton extends Component {
                 account: this.props.owner
             });
 
-            console.log(_available);
-
             this.setState({ isAvailablePending: false });
             this.setState({ available: _available });
 
@@ -161,114 +188,132 @@ class CommitButton extends Component {
             toast.error(e.message);
 
         }
-    }
+    } 
 
-    async handlePrevCommit() {
-        console.log("handlePrevCommit")
-
-        let _commitment = false; 
-
+    async handleQuery() {
         try {
-
-            this.setState({ isPendingPrevCommitment: true });
-
-            _commitment = await readContract(wagmiConfig, {
-                abi: zkfRegisterControllerABI,
-                address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
-                functionName: 'commitments',
-                args: [ ],
-                account: this.props.owner
+            let labelName = this.props.name;
+            const result = await apolloClient.query( {
+                query: GET_DOMAIN,
+                variables: {
+                    labelName
+                }
             });
 
-            console.log(_commitment);
+            console.log(result.data.domains[0] );
 
-            this.setState({ isPendingPrevCommitment: false });
-            this.setState({ commitment: _commitment });
-
-        } catch (e) {
-
-            this.setState({ isPendingPrevCommitment: false });
-            toast.error(e.message);
-
+            this.setState({ domain: result.data.domains[0] })
+        } catch(e) {
+            console.log(e);
         }
+
     }
-
-    componentDidMount () {   
-        console.log("componentDidMount")
-
+ 
+    componentDidMount () {     
         if(this.state.available === null) {
             this.handleAvailable();
         }
-
-        if(this.state.commitment === null) {
-            this.makeCommitment();
+ 
+        if(this.state.commitment === null && !this.state.isMakingCommitment) {
+            this.makeCommitment(); 
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log("componentDidUpdate")
+    componentDidUpdate(prevProps, prevState) { 
+ 
         if(prevProps.name != this.props.name) {
             this.handleAvailable();
-            this.makeCommitment();
+            this.makeCommitment(); 
         }
-    }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.props.name != nextProps.name) {
-            
+        if(prevProps.available == false) {
+            this.handleQuery();
         }
     }
  
     render() {  
-        console.log(this.minWait)
+        
         return (
             <> 
-                {this.state.isAvailablePending ? 
-                    <> 
-                        <div className="alert alert-info text-center container mt-3">
-                            <h3> Searching...</h3>
-                        </div>
-                    </>
-                    : 
-                    <> 
-                        <div className={this.state.available ? "alert alert-success text-center container mt-3": "alert alert-danger text-center container mt-3" }>
-                            <h3>  
-                                <>
-                                    { this.state.available ? <> <b>{this.props.name}.zkf</b> is available to claim 🥳 </>: <><b>{this.props.name}.zkf</b> is not available to claim 🙁</>}
-                                </> 
-                            </h3>
-                        </div>
-                    </>
-                } 
-            
-             
+            {this.state.isAvailablePending ? 
+                <> 
+                    <div className="alert alert-info text-center container mt-3">
+                        <h3> Searching...</h3>
+                    </div>
+                </>
+                : 
+                <> 
+                    <div className={this.state.available ? "alert alert-success text-center container mt-3": "alert alert-danger text-center container mt-3" }>
+                        <h3>  
+                            <>
+                                { this.state.available ? <> <b>{this.props.name}.zkf</b> is available to claim 🥳 </>: <><b>{this.props.name}.zkf</b> is not available to claim 🙁</>}
+                            </> 
+                        </h3>
+                    </div>
+                </>
+            }  
 
-            {this.state.commitment == null ? 
+            {this.state.available ? 
                 <>
-                <button className="btn btn-danger">
-                     <img width={25} src={spinner} /> Checking...
-                </button>
-                </> : 
-                <>
-                    { !this.state.isCommitted ? 
+                    {this.state.commitment == null ? 
                         <>
-                            
-                            <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
-                                {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
-                            </button>
-                            
+                        <button className="btn btn-danger">
+                            <img width={25} src={spinner} /> Checking...
+                        </button>
                         </> : 
                         <>
-                            
-                            <button disabled={this.state.isRegistring ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleRegister() }>
-                                {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>Register</>} 
-                            </button>
+                            { !this.state.isCommitted && !this.state.isCommitmentExists ? 
+                                <>
+                                    
+                                    <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
+                                        {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
+                                    </button>
+                                    
+                                </> : 
+                                <>
+                                    
+                                    <button disabled={this.state.isRegistring ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleRegister() }>
+                                        {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>Register</>} 
+                                    </button>
+                                </>
+                            }
+                            <span className="text-white mt-2">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
                         </>
                     }
-                    <span className="text-white mt-2">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
                 </>
+                : 
+                <> </>
             }
-
+ 
+            {this.state.isRegistered ? 
+                <>
+                    <Modal 
+                        size="lg" 
+                        show={this.state.isRegistered}
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered>
+                            <Modal.Header>
+                                <Modal.Title id="contained-modal-title-vcenter">
+                                    <h2>You claimed <b>{this.props.name}.zkf</b> 😎</h2>
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body className="fs-4">
+                                <h3>What's next?</h3> 
+                                <p>
+                                    See your domains on My Domains page.
+                                </p>
+                                <p>
+                                <Link className="btn btn-info btn-lg" to={"/account"}>Go to My Domains</Link>
+                                </p>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <button onClick={()=> this.setState({ isRegistered: false })} className="btn btn-default">Close</button>
+                            </Modal.Footer>
+                        </Modal> 
+                </>
+                : 
+                <></>
+            }
             
             </>
         )  

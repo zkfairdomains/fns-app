@@ -12,7 +12,6 @@ export default function Home() {
             <section>
                 <div className='container'>  
                     <Outlet />
-                    <ToastContainer position="bottom-right" autoClose={1000} hideProgressBar={false} theme="light"></ToastContainer>
                 </div>
             </section>
             <Footer/>
