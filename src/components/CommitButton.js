@@ -44,9 +44,11 @@ class CommitButton extends Component {
          isRegistered: false,
          isMakingCommitment: false,
          domain: null,
-         isTimerCompleted: false
+         isTimerCompleted: false,
+         duration: 1
       };
     }
+
     async makeCommitment() {
         console.log("make function")
  
@@ -57,13 +59,15 @@ class CommitButton extends Component {
 
         this.setState({ isMakingCommitment: true, isCommitted: false, commitment: null, secret: null, isCommiting: false });
 
+        console.log(this.props.duration);
+
         try {
             
             _commitment =  await readContract(wagmiConfig, {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "makeCommitment",
-                args: [ this.props.name, this.props.owner, this.props.duration, secret, this.resolver, this.data, this.reverseRecord ],
+                args: [ this.props.name, this.props.owner, this.props.duration * 60 * 60 * 24 * 365, secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner
             });
 
@@ -146,7 +150,7 @@ class CommitButton extends Component {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "register",
-                args: [ this.props.name, this.props.owner, this.props.duration, this.state.secret, this.resolver, this.data, this.reverseRecord ],
+                args: [ this.props.name, this.props.owner, this.props.duration * 60 * 60 * 24 * 365, this.state.secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner,
                 value: parseEther("0.25")
             });
@@ -213,6 +217,16 @@ class CommitButton extends Component {
 
     }
  
+    handleDurationDown(e) {
+        if(this.state.duration > 1 && !this.state.isCommitted)
+            this.setState({ duration: this.state.duration - 1 });
+    }
+
+    handleDurationUp(e) {
+        if(!this.state.isCommitted)
+            this.setState({ duration: this.state.duration + 1 });
+    }
+
     componentDidMount () {     
         if(this.state.available === null) {
             this.handleAvailable();
@@ -228,12 +242,18 @@ class CommitButton extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) { 
- 
+        
         if(prevProps.name != this.props.name) {
             this.handleAvailable();
             this.makeCommitment(); 
         } 
+
+        if(prevState.duration != this.state.duration) {
+            this.makeCommitment();
+        }
     }
+
+    
  
     render() {  
         
@@ -294,12 +314,13 @@ class CommitButton extends Component {
                 <div className="container">
                     <div className="white-content d-flex flex-column justify-content-center countdowncontent">
                         
-                    <div className="customCounter">
-                        <span onClick={countDown} className="countminus">-</span>
-                        <div><small className="me-3">{counter}</small> year</div>
-                        <span onClick={countUp} className="countplus">+</span>
-                    </div>
                     
+                    <div className="customCounter">
+                        <button onClick={(e)=> this.handleDurationDown(e)} className="countminus">-</button>
+                        <div><small>{this.state.duration} year </small></div>
+                        <button onClick={(e)=> this.handleDurationUp(e)} className="countplus">+</button>
+                    </div>  
+
                     {this.state.commitment == null ? 
                         <>
                         <button className="btn btn-danger  align-self-center">
@@ -334,9 +355,9 @@ class CommitButton extends Component {
                                     </button>
                                 </>
                             }
-                            <span className="mt-2 text-center">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
                         </>
                     }
+                    <span className="mt-2 text-center">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
                 </div>
                 </div>
                 : 
