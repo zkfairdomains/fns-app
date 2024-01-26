@@ -1,38 +1,9 @@
+import { WagmiProvider } from 'wagmi'
+import { wagmiConfig, chains, projectId } from "../config";
 import { createWeb3Modal } from '@web3modal/wagmi/react'
-
-import { http, createConfig, WagmiProvider } from 'wagmi'
-import { mainnet, goerli, zkFair } from 'wagmi/chains'
-import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
  
 const queryClient = new QueryClient()
- 
-const projectId = process.env.REACT_APP_PROJECT_ID
-  
-const metadata = {
-  name: 'ZKFair Domains',
-  description: ''
-}
-
-let chains = [mainnet, goerli, zkFair];
-
-const wagmiConfig = createConfig({
-  chains: chains,
-  transports: { 
-    [mainnet.id]: http(),
-    [goerli.id]: http(),
-    [zkFair.id]: http(),
-  },
-  connectors: [
-    walletConnect({ projectId, metadata, showQrModal: true }),
-    injected({ shimDisconnect: true }),
-    coinbaseWallet({
-      appName: metadata.name
-    })
-  ]
-});
- 
  
 createWeb3Modal({ wagmiConfig, projectId, chains })
 

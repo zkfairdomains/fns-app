@@ -26,8 +26,8 @@
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.4",
-    "viem": "^2.5.0",
-    "wagmi": "^2.5.0",
+    "viem": "2.x",
+    "wagmi": "^2.5.2",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

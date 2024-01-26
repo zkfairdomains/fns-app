@@ -84,7 +84,9 @@ function Search() {
                                 <DomainPrice available={available} name={name} duration={yearInSeconds} />
                             </div>
                             <div className='resultbutton d-flex justify-content-end'> 
-                                <button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
+                                <Link to={"/name/"+ name +".zkf"}>
+                                    <button disabled={ available ? '':  'disabled' }  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
+                                </Link>
                             </div>
                         </li>
                     </ul>
