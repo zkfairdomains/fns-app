@@ -23,18 +23,17 @@ function Header() {
             menuIcon[0].classList.add('active');
             controlsContent[0].classList.add('active');
         }
-        
         return false;
     }
     return ( 
         <header>
             <div className="container-fluid d-flex align-items-center justify-content-between">
-            <Link to="/" className="text-decoration-none">
-                <h1 id="logo" className="d-flex align-items-center">
-                    <img src={Logo} alt="ZKFair Domains" /> 
-                    <span className="text-white"> FNS </span>
+            <NavLink to="/">
+                <h1 id="logo">
+                        <img src={Logo} alt="Zkfair Name Services" />
+                        <span>ZKFair Domains</span>
                 </h1>
-            </Link>
+            </NavLink>
             <div className="controls-content">
                 <nav>
                     <ul className="d-flex">
@@ -48,7 +47,7 @@ function Header() {
                 </div>
             </div>
              <ConnectWalletButton></ConnectWalletButton>
-             <a onClick={ (e)=> openMobilMenu(e) }  className="mm" herf="#"><span></span><span> </span><span></span></a>
+             <a onClick={ (e)=> openMobilMenu(e) }  className="mm" href="#"><span></span><span> </span><span></span></a>
             </div> 
         </header>
         

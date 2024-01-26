@@ -10,13 +10,13 @@ export default function Home() {
             <main>
             <Header />
             <section>
-                <div className='container-fluid'>  
+                <div className='container'>  
                     <Outlet />
-                    <ToastContainer position="bottom-right" autoClose={1000} hideProgressBar={false} theme="light"></ToastContainer>
                 </div>
             </section>
-            </main>
             <Footer/>
+            </main>
+            
         </div>
     )
 }

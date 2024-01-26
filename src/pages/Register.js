@@ -9,6 +9,7 @@ const Register = () => {
     <> 
       <div className="centercontent">
             <Search />
+            <AccordionBt />
             <p className="text-white">
               This is register page.
             </p>
