@@ -13,8 +13,8 @@ export default function Page() {
                     <Outlet />
                 </div>
             </section>
-            </main>
             <Footer/>
+            </main>
         </div>
     )
 }
