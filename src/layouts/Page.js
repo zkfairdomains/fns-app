@@ -8,7 +8,7 @@ export default function Page() {
         <div>
             <main>
             <Header />
-            <section>
+            <section className="pt-5">
                 <div className='container-fluid'>  
                     <Outlet />
                     <ToastContainer position="bottom-right" autoClose={1000} hideProgressBar={false} theme="light"></ToastContainer>
