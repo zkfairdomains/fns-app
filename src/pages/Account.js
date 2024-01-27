@@ -3,7 +3,7 @@ import { useAccount } from "wagmi";
 import { GET_MY_DOMAINS } from "../graphql/Domain";
 import { apolloClient } from "../config";
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { getExpires, getTimeAgo, isExpiring } from "../helpers/String";
+import { getExpires, getTimeAgo, isExpiring, obscureName } from "../helpers/String";
 import moment from "moment";
 import ConnectWalletButton from "../partials/ConnectWalletButton";
 
@@ -40,7 +40,7 @@ const Account = () => {
                { data.domains.map((domain) => (
                   <tr id={domain.id}>
                     <td>
-                      {domain.name}
+                      {obscureName(domain.name, 30)}
                     </td>
                     <td>
                     {getTimeAgo (domain.registeredAt)}
