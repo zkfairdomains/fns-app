@@ -6327,13 +6327,13 @@ main section .banner-bg {
     background-position: calc(100% - 15px) center;
 }
 button.green {
-    background: #3b9844;
+    background: #3b9844 !important;
     border-color: #3b9844 !important;
-    color: #fff;
+    color: #fff !important;
 }
 button.green:hover {
-    color: #3b9844;
-    background-color: #fff;
+    color: #3b9844 !important;
+    background-color: #fff !important;
 }
 button.red {
     background: #e13022;
@@ -6626,6 +6626,17 @@ ul {
     .tableContent{overflow: auto;}
 }
 
-
+.container table thead td{font-size: 20px;}
 .container table tr td{color:#fff;border:1px solid #fff;padding:10px;background:rgba(255,255,255,.2);font-family:'Arial';font-size:14px}
 .container table tr td:first-child{font-weight:bold;}
+.container table tr td button{height: 30px;font-size: 16px !important;padding: 0;}
+
+.container table.tabletype2 td{
+    border: none;
+    padding:10px;
+}
+.container table.tabletype2 tr{
+  border-bottom: 1px solid rgba(255,255,255,.36);
+}
+
+.container table.tabletype2 tr:last-child{border: none;}

@@ -20,18 +20,19 @@ const Account = () => {
 
   return (
     <>  
-      <div className="container text-white">
-
+     
+      <div className="container text-white ">
+      <h2>My Domains</h2>
         {loading ? <>Loading...</>: <> </>}
         {error ? <div className="alert alert-danger">{error.message}</div>: <> </>}
         {data.domains == null || data.domains.length < 1 ? <div className="alert alert-info">No domain(s) found</div>: <></>}
-       
-        <table class="table table-responsive">
+        <div className="tableContent">
+        <table className="tabletype2">
             <thead>
-              <td>Name</td>
-              <td>Registered</td>
-              <td>Expires</td>
-              <td>Action</td>
+              <td width="35%">Name</td>
+              <td width="20%">Registered</td>
+              <td width="30%">Expires</td>
+              <td width="15%">Action</td>
             </thead>
              { data.domains.map((domain) => (
                 <tr id={domain.id}>
@@ -45,12 +46,12 @@ const Account = () => {
                   {getExpires(domain.expiryDate)}
                   </td>
                   <td>
-                  <button className="btn btn-success">Renew</button>
+                  <button className="green">Renew</button>
                   </td>
                 </tr>
               )) } 
         </table>
-          
+        </div>
       </div>
     </>
   )
