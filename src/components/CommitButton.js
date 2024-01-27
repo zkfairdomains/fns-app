@@ -1,4 +1,4 @@
-import { ethers, keccak256, parseEther } from "ethers";
+import { ethers, formatEther, keccak256, parseEther } from "ethers";
 import { apolloClient, wagmiConfig } from "../config";
 import { readContract, writeContract } from '@wagmi/core'
 import { toast } from "react-toastify";
@@ -16,10 +16,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { getExpires, getTimeAgo } from "../helpers/String";
 
 class CommitButton extends Component {
-    
-  
-
-
+     
     resolver = process.env.REACT_APP_PUBLICRESOLVER;
     data =  [];
     reverseRecord = true;
@@ -45,7 +42,10 @@ class CommitButton extends Component {
          isMakingCommitment: false,
          domain: null,
          isTimerCompleted: false,
-         duration: 1
+         duration: 1,
+         isFetchingPrice: false,
+         isFetchedPrice: true,
+         price: 0
       };
     }
 
@@ -67,7 +67,7 @@ class CommitButton extends Component {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "makeCommitment",
-                args: [ this.props.name, this.props.owner, this.state.duration * 60 * 60 * 24 * 365, secret, this.resolver, this.data, this.reverseRecord ],
+                args: [ this.props.name, this.props.owner, this.getDuration(), secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner
             });
 
@@ -150,7 +150,7 @@ class CommitButton extends Component {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "register",
-                args: [ this.props.name, this.props.owner, this.state.duration * 60 * 60 * 24 * 365, this.state.secret, this.resolver, this.data, this.reverseRecord ],
+                args: [ this.props.name, this.props.owner, this.getDuration(), this.state.secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner,
                 value: parseEther("0.25")
             });
@@ -218,13 +218,41 @@ class CommitButton extends Component {
     }
  
     handleDurationDown(e) {
-        if(this.state.duration > 1 && !this.state.isCommitted)
+        if(this.state.duration > 1 && !this.state.isCommitted) {
             this.setState({ duration: this.state.duration - 1 });
+        }
     }
 
     handleDurationUp(e) {
-        if(!this.state.isCommitted)
+        if(!this.state.isCommitted) {
             this.setState({ duration: this.state.duration + 1 });
+        }       
+    }
+
+    getDuration() {
+        return this.state.duration * 60 * 60 * 24 * 365;
+    }
+
+    async handlePrice() {
+        console.log("handlePrice")
+        let _price = false; 
+
+        try {
+            this.setState({ isAvailablePending: true });
+            _price = await readContract(wagmiConfig, {
+                abi: zkfRegisterControllerABI,
+                address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
+                functionName: 'rentPrice',
+                args: [this.props.name, this.getDuration()],
+                account: this.props.owner
+            });
+            
+            console.log(_price)
+            this.setState({ isAvailablePending: false, price: _price.base });
+        } catch(e) {
+            this.setState({ isAvailablePending: false });
+            toast.error(e.message);
+        }
     }
 
     componentDidMount () {     
@@ -239,6 +267,10 @@ class CommitButton extends Component {
         if(!this.state.available) {
             this.handleQuery(); 
         }
+
+        if(this.state.duration) { 
+            this.handlePrice();
+        }
     }
 
     componentDidUpdate(prevProps, prevState) { 
@@ -250,10 +282,10 @@ class CommitButton extends Component {
 
         if(prevState.duration != this.state.duration) {
             this.makeCommitment();
+            this.handlePrice();
         }
+        
     }
-
-    
  
     render() {  
         
@@ -314,13 +346,19 @@ class CommitButton extends Component {
                 <div className="container">
                     <div className="d-flex flex-column justify-content-center countdowncontent">
                         
-                    
-                    <div className="customCounter">
-                        <button onClick={(e)=> this.handleDurationDown(e)} className="countminus"></button>
-                        <div><small>{this.state.duration} year </small></div>
-                        <button onClick={(e)=> this.handleDurationUp(e)} className="countplus"></button>
-                    </div>  
-
+                     
+                    <ul>
+                        <li>
+                            <div className="customCounter">
+                                <button onClick={(e)=> this.handleDurationDown(e)} className="countminus"></button>
+                                <div><small>{this.state.duration} year </small></div>
+                                <button onClick={(e)=> this.handleDurationUp(e)} className="countplus"></button>
+                            </div>
+                        </li>
+                        <li className="text-center text-white fw-bold fs-5">
+                            <span>Total: <span className="fw-bold">{formatEther(  this.state.price.toString()) } ETH </span></span>
+                        </li>
+                    </ul> 
                     {this.state.commitment == null ? 
                         <>
                         <button className="btn btn-danger  align-self-center">
@@ -392,7 +430,6 @@ class CommitButton extends Component {
                 : 
                 <></>
             }
-            
             </>
         )  
       
