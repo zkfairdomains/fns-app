@@ -30,6 +30,11 @@ const Account = () => {
         {loading ? <>Loading...</>: <> </>}
         {error ? <div className="alert alert-danger">{error.message}</div>: <> </>}
         {data.domains == null || data.domains.length < 1 ? <div className="alert alert-info">No domain(s) found</div>: <></>}
+
+        <p>
+            Please note that sometimes it takes time to view your domain in this page because of data indexer delay.
+        </p>
+
         <div className="tableContent">
         <table className="tabletype2">
             <thead>
