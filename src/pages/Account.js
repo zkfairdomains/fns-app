@@ -46,7 +46,7 @@ const Account = () => {
              { data.domains.map((domain) => (
                 <tr id={domain.id}>
                   <td>
-                    {domain.name}
+                    {obscureName(domain.name, 25)}
                   </td>
                   <td>
                   {getTimeAgo (domain.registeredAt)}
