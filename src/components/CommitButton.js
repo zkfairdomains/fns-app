@@ -316,9 +316,9 @@ class CommitButton extends Component {
                         
                     
                     <div className="customCounter">
-                        <button onClick={(e)=> this.handleDurationDown(e)} className="countminus">-</button>
+                        <button onClick={(e)=> this.handleDurationDown(e)} className="countminus"></button>
                         <div><small>{this.state.duration} year </small></div>
-                        <button onClick={(e)=> this.handleDurationUp(e)} className="countplus">+</button>
+                        <button onClick={(e)=> this.handleDurationUp(e)} className="countplus"></button>
                     </div>  
 
                     {this.state.commitment == null ? 
