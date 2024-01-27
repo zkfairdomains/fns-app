@@ -106,7 +106,7 @@ Please note that, pursuant to 17 U.S.C. § 512(f), any misrepresentation of mate
 <p>Contact Information <br />
 Address: istanbul / Turkey<br />
 
-Email: <a target="_blank" href="mailto:ramazan.dnmz@gmail.com">ramazan.dnmz@gmail.com</a></p>
+Email: <a target="_blank" href="mailto:support@zkfair.domains ">support@zkfair.domains</a></p>
       </div>   
   )
 };
