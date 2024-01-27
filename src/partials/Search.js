@@ -13,15 +13,6 @@ import { Link } from 'react-router-dom';
 function Search() {
     
     
-    const handleMouseEvent = (e) => {
-        e.persist();
-        e.target.style.backgroundColor = "orange";
-        console.log('1111');
-        setTimeout(() => {
-            console.log('2222')
-        e.target.style.backgroundColor = "";
-        }, 1000);
-    };
 
     const yearInSeconds = 31556926; 
     const inputRef = useRef("")
@@ -54,7 +45,8 @@ function Search() {
     });
  
     if(error) toast.error(error.message)
- 
+    
+
     return ( 
         <div className="search-content"> 
             <form onSubmit={(e)=> { e.preventDefault(); return false; }}>
@@ -64,6 +56,7 @@ function Search() {
             </form>
             { name != "" & !valid ?
                 <>
+               
                 <div className="search-result-content">
                     <ul>
                         <li className="copy-container">
@@ -71,6 +64,7 @@ function Search() {
                         </li>
                     </ul>
                 </div>
+                 
                 </>
                 : <></>
             }

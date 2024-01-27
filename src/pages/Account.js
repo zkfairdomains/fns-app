@@ -23,43 +23,42 @@ const Account = () => {
   
     
   return (
-      <>  
-        <div className="container text-white">
- 
-          {loading ? <>Loading...</>: <> </>}
-          {error ? <div className="alert alert-danger">{error.message}</div>: <> </>}
-          {data.domains == null || data.domains.length < 1 ? <div className="alert alert-info">No domain(s) found</div>: <></>}
-         
-          <table className="table table-responsive">
-              <thead>
-                <td>Name</td>
-                <td>Registered</td>
-                <td>Expires</td>
-                <td>Action</td>
-              </thead>
-               { data.domains.map((domain) => (
-                  <tr id={domain.id}>
-                    <td>
-                      {obscureName(domain.name, 30)}
-                    </td>
-                    <td>
-                    {getTimeAgo (domain.registeredAt)}
-                    </td>
-                    <td>
-                    {getExpires(domain.expiryDate)}
-                    </td>
-                    <td>
-                      <button className="btn btn-success">Renew</button>
-                    </td>
-                  </tr>
-                )) } 
-          </table>
-            
+    <>  
+     
+      <div className="container text-white ">
+      <h2>My Domains</h2>
+        {loading ? <>Loading...</>: <> </>}
+        {error ? <div className="alert alert-danger">{error.message}</div>: <> </>}
+        {data.domains == null || data.domains.length < 1 ? <div className="alert alert-info">No domain(s) found</div>: <></>}
+        <div className="tableContent">
+        <table className="tabletype2">
+            <thead>
+              <td width="35%">Name</td>
+              <td width="20%">Registered</td>
+              <td width="30%">Expires</td>
+              <td width="15%">Action</td>
+            </thead>
+             { data.domains.map((domain) => (
+                <tr id={domain.id}>
+                  <td>
+                    {domain.name}
+                  </td>
+                  <td>
+                  {getTimeAgo (domain.registeredAt)}
+                  </td>
+                  <td>
+                  {getExpires(domain.expiryDate)}
+                  </td>
+                  <td>
+                  <button className="green">Renew</button>
+                  </td>
+                </tr>
+              )) } 
+        </table>
         </div>
-      </>
-    )
-  
-  
+      </div>
+    </>
+  )
 };
 
 export default Account;
