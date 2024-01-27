@@ -67,7 +67,7 @@ class CommitButton extends Component {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "makeCommitment",
-                args: [ this.props.name, this.props.owner, this.props.duration * 60 * 60 * 24 * 365, secret, this.resolver, this.data, this.reverseRecord ],
+                args: [ this.props.name, this.props.owner, this.state.duration * 60 * 60 * 24 * 365, secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner
             });
 
@@ -150,7 +150,7 @@ class CommitButton extends Component {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "register",
-                args: [ this.props.name, this.props.owner, this.props.duration * 60 * 60 * 24 * 365, this.state.secret, this.resolver, this.data, this.reverseRecord ],
+                args: [ this.props.name, this.props.owner, this.state.duration * 60 * 60 * 24 * 365, this.state.secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner,
                 value: parseEther("0.25")
             });

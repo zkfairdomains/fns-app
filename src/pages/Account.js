@@ -3,18 +3,20 @@ import { useAccount } from "wagmi";
 import { GET_MY_DOMAINS } from "../graphql/Domain";
 import { apolloClient } from "../config";
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { getExpires, getTimeAgo } from "../helpers/String";
+import { getExpires, getTimeAgo, isExpiring } from "../helpers/String";
+import moment from "moment";
 
 const Account = () => { 
   
   const { address: owner } = useAccount();
 
-  const { data, loading, error } = useQuery(GET_MY_DOMAINS, { variables: { owner }});
+  const now = moment().utc().unix();
+  const { data, loading, error } = useQuery(GET_MY_DOMAINS, { variables: { owner, now }});
   
   console.log(data);
   
-  if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
+  if (loading) return  <div className="container text-white"> Loading... </div>
+  if (error) return <div className="container alert alert-danger"> {error.message} </div>
 
   return (
     <>  

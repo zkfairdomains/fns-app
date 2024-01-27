@@ -26,13 +26,14 @@ export const GET_DOMAIN = gql`
 `;
 
 export const GET_MY_DOMAINS = gql`
-    query Domains( $owner: String ) {
+    query Domains( $owner: String, $now:BigInt ) {
         domains ( 
             orderBy: createdAt
-            orderDirection: desc
+            orderDirection:desc
             where: {
-                owner: $owner
-                labelName_not: null
+            owner: $owner
+            labelName_not:null
+            expiryDate_gt: $now
             }
         )
         {
@@ -41,7 +42,8 @@ export const GET_MY_DOMAINS = gql`
             labelName
             registeredAt
             createdAt
-            expiryDate 
+            expiryDate  
         }
     }
+
 `;
