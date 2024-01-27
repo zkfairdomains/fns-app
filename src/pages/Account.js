@@ -44,7 +44,7 @@ const Account = () => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Renew</Modal.Title>
+          <Modal.Title>RENEW</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="tableContent">
@@ -83,7 +83,7 @@ const Account = () => {
           {/* <Button variant="secondary" onClick={handleClose}>
             Close
           </Button> */}
-          <button className="green">Renew</button>
+          <button className="green">RENEW</button>
         </Modal.Footer>
       </Modal>
       <h2>My Domains</h2>
@@ -115,7 +115,7 @@ const Account = () => {
                   {getExpires(domain.expiryDate)}
                   </td>
                   <td>
-                  <button className="green f-19" onClick={handleShow}>Renew</button>
+                  <button className="green f-19" onClick={handleShow}>RENEW</button>
                   </td>
                 </tr>
               )) } 
