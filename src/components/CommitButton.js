@@ -13,7 +13,7 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import { getExpires, getTimeAgo } from "../helpers/String";
+import { getDateSimple, getExpires, getTimeAgo } from "../helpers/String";
 
 class CommitButton extends Component {
      
@@ -330,15 +330,15 @@ class CommitButton extends Component {
                             </tr>
                             <tr>
                                 <td>Expires</td>
-                                <td>{getExpires(this.state.domain.expiryDate)}</td>
+                                <td>{getExpires(this.state.domain.expiryDate)} - { getDateSimple(this.state.domain.expiryDate) }</td>
                             </tr>
                             <tr>
                                 <td>Created</td>
-                                <td>{getTimeAgo(this.state.domain.createdAt)}</td>
+                                <td>{getTimeAgo(this.state.domain.createdAt)} - { getDateSimple(this.state.domain.createdAt) } </td>
                             </tr>
                             <tr>
                                 <td>Registered</td>
-                                <td>{getTimeAgo(this.state.domain.registeredAt)}</td>
+                                <td>{getTimeAgo(this.state.domain.registeredAt)} - { getDateSimple(this.state.domain.registeredAt) } </td>
                             </tr>
                         </tbody>
                     </table>
@@ -360,7 +360,7 @@ class CommitButton extends Component {
                             </div>
                         </li>
                         <li className="text-center text-white fw-bold fs-5">
-                            <span>Total: <span className="fw-bold">{formatEther(  this.state.price.toString()) } ETH </span></span>
+                            <span>Total: <span className="fw-bold">{formatEther(  this.state.price.toString()) } {process.env.REACT_APP_NATIVE_TOKEN} </span></span>
                         </li>
                     </ul> 
                     {this.state.commitment == null ? 
