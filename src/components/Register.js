@@ -13,7 +13,7 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import { getDateSimple, getExpires, getTimeAgo } from "../helpers/String";
+import { getDateSimple, getExpires, getTimeAgo, getTokenId } from "../helpers/String";
 import { getBalance } from '@wagmi/core'
 
 class CommitButton extends Component {
@@ -378,6 +378,10 @@ class CommitButton extends Component {
                             <tr>
                                 <td>Label</td>
                                 <td>{this.state.domain.labelName}</td>
+                            </tr>
+                            <tr>
+                                <td>Token ID</td>
+                                <td>{getTokenId( this.state.domain.labelName )}</td>
                             </tr>
                             <tr>
                                 <td>Owner</td>
