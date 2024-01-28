@@ -19,14 +19,15 @@ function Search() {
 
     function handleSearch(e) {
         e.preventDefault();
+        let label = inputRef.current.value.toLowerCase();
          
-        if(isValidDomain(inputRef.current.value)) {
+        if(isValidDomain(label)) {
             setValid(true);
-            setName(inputRef.current.value);
+            setName(label);
         } else {
             
             setValid(false);
-            setName(inputRef.current.value);
+            setName(label);
         }
     } 
 
