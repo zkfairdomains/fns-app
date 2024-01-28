@@ -35,7 +35,7 @@ function LatestRegistered() {
                 <h2 className="mb-3 text-center">Recently Claimed</h2>
                 <Slider {...settings}>
                             { data.domains && data.domains.map( (domain) => (
-                                <div className="p-3">
+                                <div className="p-1">
                                 <Link to={"/name/"+ domain.name } className="text-white fs-4">
                                 <img className="w-100" src={process.env.REACT_APP_METADATA_URL + "/"+ getTokenId(domain.labelName) + "/image"} alt={domain.name} />
                                     {/* {obscureName(domain.name, 20)} */}
