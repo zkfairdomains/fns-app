@@ -30,7 +30,7 @@ const Account = () => {
           <h2>My Domains</h2> 
           <div className="d-flex justify-content-between mb-3">
             <p>
-              Please note that sometimes it takes time to view your domain in this page because of data indexer delay.
+              Please note that sometimes it takes time to view/update your domains in this page because of data indexer delay.
             </p>
             <button disabled={ loading ? "disabled": ""} className="btn btn-sm btn-secondary text-white" onClick={() => refetch()}>{ loading ? <img width={25} src={spinner} /> : <></>} Refresh</button>
           </div> 
