@@ -5,7 +5,7 @@ import { apolloClient } from "../config";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { getExpires, getTimeAgo, isExpiring, obscureName } from "../helpers/String";
 import moment from "moment";
-import ConnectWalletButton from "../partials/ConnectWalletButton";
+import ConnectWalletButton from "../components/ConnectWalletButton";
 import RenewModal from "../components/RenewModal";
 import { Modal, Spinner } from "react-bootstrap";
 import spinner from '../assets/images/spinner.svg';

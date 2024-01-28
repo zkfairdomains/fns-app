@@ -14,7 +14,7 @@ import { hexToBytes, stringToBytes, toBytes } from "viem";
 import { wagmiConfig } from "../config";
 import { readContract, writeContract } from '@wagmi/core'
 import Register from "../components/Register";
-import ConnectWalletButton from "../partials/ConnectWalletButton";
+import ConnectWalletButton from "../components/ConnectWalletButton";
 import { useLazyQuery } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
 
