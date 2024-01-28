@@ -76,7 +76,7 @@ function Search() {
                 <div className="search-result-content">
                     <ul>
                         <li className="copy-container">
-                            <span className="domainName ">{obscureName(name, 30)}.zkf </span>
+                            <span className="domainName ">{obscureName(name, 20)}.zkf </span>
                             <div className='pricing'>
                                 <DomainPrice available={available} name={name} duration={yearInSeconds} />
                             </div>

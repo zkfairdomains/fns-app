@@ -1,7 +1,7 @@
 import { http, createConfig } from 'wagmi'
 import { mainnet, goerli, zkFair } from 'wagmi/chains'
 import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client"; 
 
 export const projectId = process.env.REACT_APP_PROJECT_ID
   
