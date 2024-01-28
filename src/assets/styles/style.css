@@ -6675,3 +6675,12 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
 
   .modal table{margin-bottom: 20px;}
   .modal .btn-close{max-width: 40px;max-height: 40px ;}
+
+.notFoundPage{display: flex;align-items: center;justify-content: center;flex-direction: column;}
+.notFoundPage *{color:#fff;}
+.notFoundPage  h2{font-size: 13vw;text-align: center;}
+.notFoundPage  p{font-size: 3vw;text-align: center;}
+@media(max-width:500px){
+    .notFoundPage  h2{font-size: 54px;}
+    .notFoundPage  p{font-size: 24px;}
+}
