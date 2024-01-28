@@ -13,7 +13,7 @@ import { ethers, keccak256 } from "ethers";
 import { hexToBytes, stringToBytes, toBytes } from "viem";
 import { wagmiConfig } from "../config";
 import { readContract, writeContract } from '@wagmi/core'
-import CommitButton from "../components/CommitButton";
+import Register from "../components/Register";
 import ConnectWalletButton from "../partials/ConnectWalletButton";
 import { useLazyQuery } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
@@ -39,7 +39,7 @@ const Name = () => {
                 {!isValidDomain(name) ?  <IsInvalid name={name} /> 
                     : 
                     <> 
-                       { !isConnected || SUPPORTED_CHAIN_ID !== chainId ?  <div className="mt-3"> <ConnectWalletButton /> </div> : <CommitButton name={name} duration={3156600} owner={registrar} /> }
+                       { !isConnected || SUPPORTED_CHAIN_ID !== chainId ?  <div className="mt-3"> <ConnectWalletButton /> </div> : <Register name={name} duration={3156600} owner={registrar} /> }
                     </> 
                 } 
             </div>
