@@ -27,10 +27,12 @@ main section {
     flex-direction: column;
     padding-top: 100px;
 }
+main section>div{padding-bottom: 100px;}
 @media(max-width:768px){
    main section{
     padding-top: 50px;
    }
+   
 }
 .centercontent {
     display: flex;
@@ -6671,4 +6673,5 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
     border-bottom: 1px solid rgba(0,0,0,.36);
   }
 
+  .modal table{margin-bottom: 20px;}
   .modal .btn-close{max-width: 40px;max-height: 40px ;}
