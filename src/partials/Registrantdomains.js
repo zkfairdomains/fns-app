@@ -1,18 +1,15 @@
 import Search from "./Search";
 import Accordion from './Accordion';
 import Tabs from './Tabs';
-import Connectwalletbutton from "./Connectwalletbutton";
+import ConnectWalletButton from "./ConnectWalletButton";
 function Registrantdomains() {
     return ( 
         <div className="centercontent">
             <Search />
             <Accordion />
             <Tabs />
-            <Connectwalletbutton />
-            
-
+            <ConnectWalletButton />
         </div>
-        
      );
 }
 
