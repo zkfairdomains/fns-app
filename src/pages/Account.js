@@ -7,7 +7,8 @@ import { getExpires, getTimeAgo, isExpiring, obscureName } from "../helpers/Stri
 import moment from "moment";
 import ConnectWalletButton from "../partials/ConnectWalletButton";
 import RenewModal from "../components/RenewModal";
-import { Modal } from "react-bootstrap";
+import { Modal, Spinner } from "react-bootstrap";
+import spinner from '../assets/images/spinner.svg';
 
 const Account = () => { 
   
@@ -31,7 +32,7 @@ const Account = () => {
             <p>
               Please note that sometimes it takes time to view your domain in this page because of data indexer delay.
             </p>
-            <button className="btn btn-sm btn-light" onClick={() => refetch()}>Refresh</button>
+            <button disabled={ loading ? "disabled": ""} className="btn btn-sm btn-secondary text-white" onClick={() => refetch()}>{ loading ? <img width={25} src={spinner} /> : <></>} Refresh</button>
           </div> 
           { loading ? <div className="tableContent text-white"> Loading... </div> 
           :
