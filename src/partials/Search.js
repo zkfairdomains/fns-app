@@ -11,9 +11,7 @@ import DomainPrice from '../components/DomainPrice';
 import { Link } from 'react-router-dom';
 
 function Search() {
-    
-    
-
+     
     const yearInSeconds = 31556926; 
     const inputRef = useRef("")
     const [name, setName] = useState(""); 
@@ -45,8 +43,7 @@ function Search() {
     });
  
     if(error) toast.error(error.message)
-    
-
+     
     return ( 
         <div className="search-content"> 
             <form onSubmit={(e)=> { e.preventDefault(); return false; }}>

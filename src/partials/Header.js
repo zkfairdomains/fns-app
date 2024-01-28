@@ -1,6 +1,6 @@
 import * as React from "react";
 import Logo from '../assets/images/zfknameservice-logo.svg'; 
-import ConnectWalletButton from "./ConnectWalletButton"; 
+import ConnectWalletButton from "../components/ConnectWalletButton"; 
 import { Link, NavLink } from 'react-router-dom';
 import { useRef } from "react";
 

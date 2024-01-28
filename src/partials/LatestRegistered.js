@@ -43,8 +43,7 @@ function LatestRegistered() {
                                 </div>
                         ))}
                     
-                </Slider>
-                
+                </Slider> 
             </div>
         } 
        </>
