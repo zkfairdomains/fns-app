@@ -47,3 +47,24 @@ export const GET_MY_DOMAINS = gql`
     }
 
 `;
+
+export const LATEST_REGISTERED = gql`
+    query LatestRegistered {
+        domains ( 
+            first: 25
+            orderBy: createdAt
+            orderDirection: desc
+            where:  {
+                name_not: null
+            }
+        )
+        {
+            id
+            name
+            labelName
+            registeredAt
+            createdAt
+            expiryDate  
+        }
+    }
+`;
