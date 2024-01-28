@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { LATEST_REGISTERED } from "../graphql/Domain";
-import { obscureName } from "../helpers/String";
+import { getTokenId, obscureName } from "../helpers/String";
 import { Link } from "react-router-dom";
 
 function LatestRegistered() {
@@ -14,6 +14,7 @@ function LatestRegistered() {
             <ul className="list-inline">
                 { data.domains && data.domains.map( (domain) => (
                     <li className="list-inline-item ">
+                        <img src={process.env.REACT_APP_METADATA_URL + "/"+ getTokenId(domain.labelName) + "/image"} alt={domain.name} />
                         <Link to={"/name/"+ domain.name } className="text-white fs-4">
                             {obscureName(domain.name, 20)}
                         </Link>
