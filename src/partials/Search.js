@@ -1,6 +1,7 @@
 import searchIcon from '../assets/images/search-icon.svg';
 import loadericon from '../assets/images/loader-icon.svg';
 import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
+import { mainnet, goerli, zkFair } from 'wagmi/chains'
 
 import { useReadContract } from 'wagmi'
 import { useRef, useState } from 'react';
@@ -9,6 +10,7 @@ import { toast } from 'react-toastify';
 import { isValidDomain } from "../helpers/String";
 import DomainPrice from '../components/DomainPrice';
 import { Link } from 'react-router-dom';
+import { chains } from '../config';
 
 function Search() {
      
@@ -40,6 +42,7 @@ function Search() {
         ...zkfRegisterControllerConfig,
         functionName: 'available',
         args: [name],
+        chainId: process.env.NODE_ENV === "production" ? zkFair.id: goerli.id,
         onError: (err) => { console.error(err) }
     });
  
