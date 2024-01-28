@@ -14,17 +14,17 @@ function LatestRegistered() {
         infinite: true,
         arrows:true,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         autoplaySpeed: 2000,
         responsive: [
             {
               breakpoint: 1024,
-              settings: { slidesToShow: 2, slidesToScroll: 2 }
+              settings: { slidesToShow: 3, slidesToScroll: 3 }
             },
             {
               breakpoint: 600,
-              settings: { slidesToShow: 1, slidesToScroll: 1 }
+              settings: { slidesToShow: 2, slidesToScroll: 2 }
             }
           ]
       };
@@ -32,7 +32,7 @@ function LatestRegistered() {
         <>
         { loading ? <div className="tableContent text-white"> Loading... </div> : 
             <div className="container text-white pt-4">
-                <h2 className="mb-3">Latest Registered</h2>
+                <h2 className="mb-3 text-center">Recently Claimed</h2>
                 <Slider {...settings}>
                             { data.domains && data.domains.map( (domain) => (
                                 <div className="p-3">
