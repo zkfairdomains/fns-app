@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import searchIcon from '../assets/images/search-icon.svg';
 import loadericon from '../assets/images/loader-icon.svg';
 import { Navigate, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { isAvailable, isValidDomain } from "../helpers/String";
+import { isAvailable, isValidDomain, obscureName } from "../helpers/String";
 import DomainPrice from '../components/DomainPrice';
 import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
 import { useAccount, useChainId, useReadContract, useReadContracts, useWriteContract } from 'wagmi'
@@ -81,7 +81,7 @@ function IsInvalid({name}) {
     return (
         <>  
             <h3 className="alert alert-danger text-center container mt-3">
-                <b>{name}</b> is invalid!
+                <b>{obscureName(name, 50)}</b> is invalid!
             </h3> 
         </>
     ) 

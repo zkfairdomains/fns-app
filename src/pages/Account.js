@@ -32,7 +32,7 @@ const Account = () => {
             <p>
               Please note that sometimes it takes time to view/update your domains in this page because of data indexer delay.
             </p>
-            <button disabled={ loading ? "disabled": ""} className="btn btn-sm btn-secondary text-white" onClick={() => refetch()}>{ loading ? <img width={25} src={spinner} /> : <></>} Refresh</button>
+            <button disabled={ loading ? "disabled": ""} className="btn btn-sm btn-secondary text-white" onClick={() => refetch()}>{ loading ? <img width={25} src={spinner} /> : <> Refresh </>} </button>
           </div> 
           { loading ? <div className="tableContent text-white"> Loading... </div> 
           :
@@ -52,7 +52,7 @@ const Account = () => {
                   { data.domains.map((domain) => (
                       <tr key={domain.id}>
                         <td>
-                          {obscureName(domain.name, 25)}
+                          {obscureName(domain.name, 30)}
                         </td>
                         <td>
                           {getTimeAgo (domain.registeredAt)}

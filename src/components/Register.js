@@ -13,7 +13,7 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import { getDateSimple, getExpires, getTimeAgo, getTokenId } from "../helpers/String";
+import { getDateSimple, getExpires, getTimeAgo, getTokenId, obscureLabel, obscureName } from "../helpers/String";
 import { getBalance } from '@wagmi/core'
 
 class CommitButton extends Component {
@@ -355,8 +355,7 @@ class CommitButton extends Component {
                     <div className="container mt-3">
                         <div className="alert alert-info text-center">
                             <h3> Searching...</h3>
-                        </div>
-                        
+                        </div> 
                     </div>
                 </>
                 : 
@@ -364,7 +363,7 @@ class CommitButton extends Component {
                     <div className={this.state.available ? "alert alert-success text-center": "alert alert-danger text-center" }>
                         <h3>  
                             <>
-                                { this.state.available ? <> <b>{this.props.name}.zkf</b> is available to claim 🥳 </>: <><b>{this.props.name}.zkf</b> is not available to claim 🙁</>}
+                                { this.state.available ? <> <b>{obscureLabel(this.props.name, 30)}.zkf</b> is available to claim 🥳 </>: <><b>{obscureLabel(this.props.name, 30)}.zkf</b> is not available to claim 🙁</>}
                             </> 
                         </h3>
                     </div>
@@ -484,7 +483,7 @@ class CommitButton extends Component {
                         centered>
                             <Modal.Header>
                                 <Modal.Title id="contained-modal-title-vcenter">
-                                    <h2>You claimed <b>{this.props.name}.zkf</b> 😎</h2>
+                                    <h2>You claimed <b>{obscureName(this.props.name, 50)}.zkf</b> 😎</h2>
                                 </Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="fs-4">

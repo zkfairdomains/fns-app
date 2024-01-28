@@ -1,10 +1,9 @@
-import searchIcon from '../assets/images/search-icon.svg';
-import loadericon from '../assets/images/loader-icon.svg';
 import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
 
 import { useReadContract } from 'wagmi'
 import { toast } from 'react-toastify'; 
-import { toGwei, fromWei } from '../helpers/String';
+import { fromWei } from '../helpers/String';
+import { goerli, zkFair } from 'wagmi/chains'
 
 function DomainPrice({available, name, duration}) { 
  
@@ -17,6 +16,7 @@ function DomainPrice({available, name, duration}) {
         ...zkfRegisterControllerConfig,
         functionName: 'rentPrice',
         args: [name, duration],
+        chain: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id,
         onError: (err) => { console.error(err) }
     });
  

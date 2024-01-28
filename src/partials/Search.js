@@ -1,16 +1,15 @@
 import searchIcon from '../assets/images/search-icon.svg';
 import loadericon from '../assets/images/loader-icon.svg';
 import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
-import { mainnet, goerli, zkFair } from 'wagmi/chains'
+import { goerli, zkFair } from 'wagmi/chains'
 
 import { useReadContract } from 'wagmi'
 import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { isValidDomain } from "../helpers/String";
+import { isValidDomain, obscureName } from "../helpers/String";
 import DomainPrice from '../components/DomainPrice';
-import { Link } from 'react-router-dom';
-import { chains } from '../config';
+import { Link } from 'react-router-dom'; 
 
 function Search() {
      
@@ -64,7 +63,7 @@ function Search() {
                 <div className="search-result-content">
                     <ul>
                         <li className="copy-container">
-                            <span className='alert alert-danger container-fluid'>{name} is invalid!</span>
+                            <span className='alert alert-danger container-fluid'>{obscureName(name, 50)} is invalid!</span>
                         </li>
                     </ul>
                 </div>
@@ -77,7 +76,7 @@ function Search() {
                 <div className="search-result-content">
                     <ul>
                         <li className="copy-container">
-                            <span className="domainName ">{name}.zkf </span>
+                            <span className="domainName ">{obscureName(name, 30)}.zkf </span>
                             <div className='pricing'>
                                 <DomainPrice available={available} name={name} duration={yearInSeconds} />
                             </div>
