@@ -13,7 +13,7 @@ function LatestRegistered() {
         { loading ? <div className="tableContent text-white"> Loading... </div> : 
             <ul className="list-inline">
                 { data.domains && data.domains.map( (domain) => (
-                    <li className="list-inline-item ">
+                    <li key={domain.id} className="list-inline-item ">
                         <img src={process.env.REACT_APP_METADATA_URL + "/"+ getTokenId(domain.labelName) + "/image"} alt={domain.name} />
                         <Link to={"/name/"+ domain.name } className="text-white fs-4">
                             {obscureName(domain.name, 20)}
