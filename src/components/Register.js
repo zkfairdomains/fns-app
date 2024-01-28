@@ -48,7 +48,9 @@ class CommitButton extends Component {
          isFetchedPrice: true,
          price: 0,
          isGettingBalance: false,
-         balance: 0
+         balance: 0,
+         showCounter: false,
+         countdown: 0
       };
     }
 
@@ -90,12 +92,20 @@ class CommitButton extends Component {
                 args: [ _commitment ],
                 account: this.props.owner
             });
+ 
+            console.log("Min: "+ this.getMinCommitTime(result)  );
+            console.log("Max: "+ this.getMaxCommitTime(result)  );
+            console.log("NOW:"+ this.getUnixTime())
+            console.log("Diff:"+   parseInt(this.getMinCommitTime(result)- this.getUnixTime()) )
 
-            console.log("result: "+ result);
-
-            if(result > 0 &&  Number(result) + this.maxWait >= moment().utc().unix() ) {
-                this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: true })
-            } else this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: false })
+            if( result > 0 && this.getMinCommitTime(result) < this.getUnixTime() && this.getMaxCommitTime(result) > this.getUnixTime() ) {
+                this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: true, isTimerCompleted: true });
+            } else if( result > 0 && this.getMinCommitTime(result) >= this.getUnixTime() && this.getMaxCommitTime(result) > this.getUnixTime() ) {
+                const _countdown = parseInt(this.getMinCommitTime(result) - this.getUnixTime() );
+                this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: true, isTimerCompleted: false, countdown: _countdown + 1 });
+            } else {
+                this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: false, isTimerCompleted: false  })
+            } 
 
         } catch (e) {
 
@@ -103,11 +113,22 @@ class CommitButton extends Component {
 
         }
     }
+
+    getMinCommitTime (c) {
+        return moment.unix(parseInt(c)).add(this.minWait, "seconds").unix();
+    }
+
+    getMaxCommitTime (c) {
+        return moment.unix(parseInt(c)).add(this.maxWait, "seconds").unix();
+    }
+
+    getUnixTime () {
+        return moment().utc().unix();
+    }
  
     async handleCommit () {
          
-        this.setState({ isCommiting: true })
-        this.setState({ isCommitted: false })
+        this.setState({ isCommiting: true, isCommitted: false  });
  
         try {
             const _hash = await writeContract(wagmiConfig, {
@@ -121,6 +142,7 @@ class CommitButton extends Component {
                 }
             });
 
+          
             toast.success("Your transaction has been sent.");
 
             console.log(_hash);
@@ -131,7 +153,7 @@ class CommitButton extends Component {
 
             toast.success("Your tx has been completed. Please wait for a while...")
  
-            this.setState({ isCommitted: true });
+            this.setState({ isCommiting: false, isCommitted: true });
         } catch(e) {
             console.log(e);
             this.setState({ isCommiting: false });
@@ -240,6 +262,8 @@ class CommitButton extends Component {
         return this.state.duration * 60 * 60 * 24 * 365;
     }
 
+    
+
     async handlePrice() {
         console.log("handlePrice")
         let _price = false; 
@@ -280,7 +304,9 @@ class CommitButton extends Component {
         }
     }
 
-    componentDidMount () {     
+    componentDidMount () {   
+        
+        console.log("commitments:"+ this.state.commitments);
         
         if(this.state.available === null) { 
             this.handleAvailable();
@@ -317,8 +343,6 @@ class CommitButton extends Component {
         }
         
     }
-
-    
  
     render() {  
         
@@ -409,17 +433,20 @@ class CommitButton extends Component {
                                                 </button>  
                                             </> : 
                                             <>
-                                                <CountdownCircleTimer 
-                                                        size={48}
-                                                        strokeWidth={3}
-                                                        isPlaying
-                                                        duration={Number(process.env.REACT_APP_MINCOMMITMENTAGE)} 
-                                                        colors={['#239e01', '#2ece02', '#e5ed07', '#e13022']}
-                                                        colorsTime={[7, 5, 2, 0]}
-                                                        onComplete={()=> this.setState({ isTimerCompleted: true })}
-                                                        >
-                                                        {({ remainingTime }) => remainingTime}
-                                                </CountdownCircleTimer> 
+                                                { this.state.isCommitted || (this.state.isCommitmentExists && !this.state.isTimerCompleted) ?
+                                                    <CountdownCircleTimer 
+                                                            size={48}
+                                                            strokeWidth={3}
+                                                            isPlaying
+                                                            duration={ this.state.countdown < 1 ? Number(process.env.REACT_APP_MINCOMMITMENTAGE): this.state.countdown } 
+                                                            colors={['#239e01', '#2ece02', '#e5ed07', '#e13022']}
+                                                            colorsTime={[7, 5, 2, 0]}
+                                                            onComplete={()=> this.setState({ isTimerCompleted: true })}
+                                                            >
+                                                            {({ remainingTime }) => remainingTime}
+                                                    </CountdownCircleTimer>
+                                                    : <></>
+                                                }
                                                 
                                                 <button disabled={this.state.isRegistring || !this.state.isTimerCompleted ? "disabled": ""} className="btn btn-success align-self-center" onClick={(e)=> this.handleRegister() }>
                                                     {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>Register</>} 
