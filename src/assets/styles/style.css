@@ -1,6 +1,8 @@
 /*#root{height: 100%;display: flex;justify-content: center;align-items: center;flex-direction: column;}
 #root > div{width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;flex-direction: column;}
 */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 #root,
 #root > div:not(.Toastify) {
     min-height: 100%;
@@ -6684,3 +6686,7 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
     .notFoundPage  h2{font-size: 54px;}
     .notFoundPage  p{font-size: 24px;}
 }
+
+.slick-arrow{width: 40px;height: 40px;z-index: 999;display: flex;justify-content: center;min-width: unset;text-indent: -9999px;}
+.slick-arrow.slick-next{right: 4px;background: url('../images/left-arrow-icon.svg') no-repeat center rgba(255,255,255,.5);transform: rotate(180deg);-webkit-transform: rotate(180deg);}
+.slick-arrow.slick-prev{left: 4px;background: url('../images/left-arrow-icon.svg') no-repeat center rgba(255,255,255,.5);}
