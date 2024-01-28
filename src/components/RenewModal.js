@@ -14,6 +14,7 @@ import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { getExpires, getTimeAgo, obscureName } from "../helpers/String";
+import { getBalance } from '@wagmi/core'
 
 class RenewModal extends Component {
 
@@ -29,7 +30,9 @@ class RenewModal extends Component {
            price: 0,
            isRenewing: false,
            isRenewed: false,
-           showModal: undefined
+           showModal: undefined,
+           balance: 0,
+           isGettingBalance: false
         };
  
     }
@@ -118,6 +121,24 @@ class RenewModal extends Component {
         }
     }
 
+    async handleBalance() {
+        console.log("handleBalance")
+        try {
+
+            this.setState({ isGettingBalance : true });
+
+            const balance = await getBalance(wagmiConfig, {
+                address: this.props.owner, 
+            });
+
+            this.setState({ isGettingBalance : false, balance: balance.value });
+            console.log("balance:"+ balance.value)
+        } catch(e) {
+            this.setState({ isGettingBalance : false });
+            toast.error(e.message);
+        }
+    }
+ 
     componentDidMount () {     
        
     }
@@ -126,10 +147,12 @@ class RenewModal extends Component {
 
         if(this.state.showModal != prevState.showModal) {
             this.handlePrice();
+            this.handleBalance();
         }
 
         if(prevState.duration != this.state.duration ) {
             this.handlePrice();
+            this.handleBalance();
         }
     }
 
@@ -159,8 +182,7 @@ class RenewModal extends Component {
                             <tr>
                                 <th width="35%">Name</th>
                                 <th width="35%">Expires</th>
-                                <th width="35%">Extend</th>
-                                <th width="30%">Price</th>
+                                <th width="35%">Extend</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -175,10 +197,8 @@ class RenewModal extends Component {
                                     </small></div>
                                     <button onClick={(e)=> this.handleDurationUp(e)} className="countplus"><em></em><em></em></button>
                                 </div>
-                            </td>
-                            <td>
-                                {this.state.isFetchedPrice ? formatEther(  this.state.price.toString()) : "..." } {process.env.REACT_APP_NATIVE_TOKEN}
-                            </td>
+                                {this.state.isFetchedPrice ? formatEther(  this.state.price.toString()) : "..." } {process.env.REACT_APP_NATIVE_TOKEN} + GAS Fee
+                            </td> 
                         </tr>
                         </tbody>
                     </table> 
@@ -186,9 +206,24 @@ class RenewModal extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-default" onClick={() => this.handleClose() }>Cancel</button>
-                    <button className="btn btn-success" onClick={()=> this.handleRenew()}>
-                        {this.state.isRenewing ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Extend</>} 
-                    </button>
+                    { this.isFetchingPrice || this.state.isGettingBalance ? 
+                            <button className="btn btn-default  align-self-center">
+                                <img width={25} src={spinner} /> Checking...
+                            </button>
+                            : 
+                            <>
+                                { this.state.balance < this.state.price ? 
+                                    <button disabled="disabled" className="btn btn-danger">
+                                        Unsufficient Balance {this.state.balance}
+                                    </button>
+                                    :
+                                    <button className="btn btn-success" onClick={()=> this.handleRenew()}>
+                                        {this.state.isRenewing ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Extend</>} 
+                                    </button>
+                                }
+                            </>
+                    }
+                    
                 </Modal.Footer>
             </Modal>
             </>

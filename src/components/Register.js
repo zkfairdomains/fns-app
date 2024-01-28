@@ -14,6 +14,7 @@ import {  } from "@apollo/client";
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { getDateSimple, getExpires, getTimeAgo } from "../helpers/String";
+import { getBalance } from '@wagmi/core'
 
 class CommitButton extends Component {
      
@@ -45,7 +46,9 @@ class CommitButton extends Component {
          duration: 1,
          isFetchingPrice: false,
          isFetchedPrice: true,
-         price: 0
+         price: 0,
+         isGettingBalance: false,
+         balance: 0
       };
     }
 
@@ -240,9 +243,9 @@ class CommitButton extends Component {
     async handlePrice() {
         console.log("handlePrice")
         let _price = false; 
-
+ 
         try {
-            this.setState({ isAvailablePending: true });
+            this.setState({ isFetchingPrice: true });
             _price = await readContract(wagmiConfig, {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
@@ -252,15 +255,34 @@ class CommitButton extends Component {
             });
             
             console.log(_price)
-            this.setState({ isAvailablePending: false, price: _price.base });
+            this.setState({ isFetchingPrice: false, price: _price.base });
         } catch(e) {
-            this.setState({ isAvailablePending: false });
+            this.setState({ isFetchedPrice: false });
+            toast.error(e.message);
+        }
+    }
+
+    async handleBalance() {
+        console.log("handleBalance")
+        try {
+
+            this.setState({ isGettingBalance : true });
+
+            const balance = await getBalance(wagmiConfig, {
+                address: this.props.owner, 
+            });
+
+            this.setState({ isGettingBalance : false, balance: balance.value });
+            console.log("balance:"+ balance.value)
+        } catch(e) {
+            this.setState({ isGettingBalance : false });
             toast.error(e.message);
         }
     }
 
     componentDidMount () {     
-        if(this.state.available === null) {
+        
+        if(this.state.available === null) { 
             this.handleAvailable();
         }
  
@@ -274,6 +296,7 @@ class CommitButton extends Component {
 
         if(this.state.duration) { 
             this.handlePrice();
+            this.handleBalance();
         }
     }
 
@@ -281,15 +304,21 @@ class CommitButton extends Component {
         
         if(prevProps.name != this.props.name) {
             this.handleAvailable();
-            this.makeCommitment(); 
+            this.makeCommitment();
+            this.handleQuery();
+            this.handlePrice();
+            this.handleBalance();
         } 
 
         if(prevState.duration != this.state.duration) {
             this.makeCommitment();
             this.handlePrice();
+            this.handleBalance();
         }
         
     }
+
+    
  
     render() {  
         
@@ -349,57 +378,61 @@ class CommitButton extends Component {
             {this.state.available ? 
                 <div className="container">
                     <div className="d-flex flex-column justify-content-center countdowncontent">
-                        
-                     
-                    <ul>
-                        <li>
-                            <div className="customCounter">
-                                <button onClick={(e)=> this.handleDurationDown(e)} className="countminus"></button>
-                                <div><small>{this.state.duration} year </small></div>
-                                <button onClick={(e)=> this.handleDurationUp(e)} className="countplus"></button>
-                            </div>
-                        </li>
-                        <li className="text-center text-white fw-bold fs-5">
-                            <span>Total: <span className="fw-bold">{formatEther(  this.state.price.toString()) } {process.env.REACT_APP_NATIVE_TOKEN} </span></span>
-                        </li>
-                    </ul> 
-                    {this.state.commitment == null ? 
-                        <>
-                        <button className="btn btn-danger  align-self-center">
-                            <img width={25} src={spinner} /> Checking...
-                        </button>
-                        </> : 
-                        <>
-                            { !this.state.isCommitted && !this.state.isCommitmentExists ? 
+                        <ul>
+                            <li>
+                                <div className="customCounter">
+                                    <button onClick={(e)=> this.handleDurationDown(e)} className="countminus"></button>
+                                    <div><small>{this.state.duration} year </small></div>
+                                    <button onClick={(e)=> this.handleDurationUp(e)} className="countplus"></button>
+                                </div>
+                            </li>
+                            <li className="text-center text-white fw-bold fs-5">
+                                <span>Total: <span className="fw-bold">{formatEther(  this.state.price.toString()) } {process.env.REACT_APP_NATIVE_TOKEN} </span> + GAS Fee</span>
+                            </li>
+                        </ul> 
+                        {this.state.commitment == null || this.isFetchingPrice || this.state.isGettingBalance ? 
+                            <button className="btn btn-danger  align-self-center">
+                                <img width={25} src={spinner} /> Checking...
+                            </button>
+                            : 
+                            <>
+                                { this.state.balance < this.state.price ?
+                                    <button disabled="disabled" className="btn btn-light">
+                                        Unsufficient Balance {this.state.balance}
+                                    </button>
+                                    :
+                                    <>
+                                        { !this.state.isCommitted && !this.state.isCommitmentExists ?  
+                                            <> 
+                                                <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
+                                                    {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
+                                                </button>  
+                                            </> : 
+                                            <>
+                                                <CountdownCircleTimer 
+                                                        size={48}
+                                                        strokeWidth={3}
+                                                        isPlaying
+                                                        duration={Number(process.env.REACT_APP_MINCOMMITMENTAGE)} 
+                                                        colors={['#239e01', '#2ece02', '#e5ed07', '#e13022']}
+                                                        colorsTime={[7, 5, 2, 0]}
+                                                        onComplete={()=> this.setState({ isTimerCompleted: true })}
+                                                        >
+                                                        {({ remainingTime }) => remainingTime}
+                                                </CountdownCircleTimer> 
+                                                
+                                                <button disabled={this.state.isRegistring || !this.state.isTimerCompleted ? "disabled": ""} className="btn btn-success align-self-center" onClick={(e)=> this.handleRegister() }>
+                                                    {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>Register</>} 
+                                                </button>
+                                            </>
+                                        }
+                                    </>
+                                }
                                 
-                                <>
-                                    <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
-                                        {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
-                                    </button>
-                                    
-                                </> : 
-                                <>
-                                    <CountdownCircleTimer 
-                                            size={48}
-                                            strokeWidth={3}
-                                            isPlaying
-                                            duration={Number(process.env.REACT_APP_MINCOMMITMENTAGE)} 
-                                            colors={['#239e01', '#2ece02', '#e5ed07', '#e13022']}
-                                            colorsTime={[7, 5, 2, 0]}
-                                            onComplete={()=> this.setState({ isTimerCompleted: true })}
-                                            >
-                                            {({ remainingTime }) => remainingTime}
-                                    </CountdownCircleTimer> 
-
-                                    <button disabled={this.state.isRegistring || !this.state.isTimerCompleted ? "disabled": ""} className="btn btn-success align-self-center" onClick={(e)=> this.handleRegister() }>
-                                        {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>Register</>} 
-                                    </button>
-                                </>
-                            }
-                        </>
-                    }
-                    <span className="mt-2 text-center text-white">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
-                </div>
+                            </>
+                        }
+                        <span className="mt-2 text-center text-white">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
+                    </div>
                 </div>
                 : 
                 <> </>
