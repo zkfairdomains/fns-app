@@ -38,11 +38,14 @@ function Search() {
         abi: zkfRegisterControllerABI
     };
 
+    console.log("NODE_ENV:" + process.env.NODE_ENV);
+    console.log("REACT_APP_NODE_ENV:" + process.env.REACT_APP_NODE_ENV);
+
     const { data: available, error, isPending } = useReadContract({
         ...zkfRegisterControllerConfig,
         functionName: 'available',
         args: [name],
-        chainId: process.env.NODE_ENV === "production" ? zkFair.id: goerli.id,
+        chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id,
         onError: (err) => { console.error(err) }
     });
  
