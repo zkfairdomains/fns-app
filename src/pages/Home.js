@@ -1,4 +1,5 @@
 import Banner from "../partials/Banner"
+import LatestRegistered from "../partials/LatestRegistered";
 import Search from "../partials/Search";
 
 function Home() {
@@ -6,6 +7,7 @@ function Home() {
         <div className="centercontent">
             <Banner />
             <Search />
+            <LatestRegistered />
         </div> 
      );
 }

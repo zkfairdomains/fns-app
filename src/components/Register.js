@@ -93,14 +93,17 @@ class CommitButton extends Component {
                 account: this.props.owner
             });
  
+            console.log("Result: "+ result  );
             console.log("Min: "+ this.getMinCommitTime(result)  );
             console.log("Max: "+ this.getMaxCommitTime(result)  );
             console.log("NOW:"+ this.getUnixTime())
             console.log("Diff:"+   parseInt(this.getMinCommitTime(result)- this.getUnixTime()) )
 
             if( result > 0 && this.getMinCommitTime(result) < this.getUnixTime() && this.getMaxCommitTime(result) > this.getUnixTime() ) {
+                console.log("timer completed")
                 this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: true, isTimerCompleted: true });
             } else if( result > 0 && this.getMinCommitTime(result) >= this.getUnixTime() && this.getMaxCommitTime(result) > this.getUnixTime() ) {
+                console.log("timer uncompleted")
                 const _countdown = parseInt(this.getMinCommitTime(result) - this.getUnixTime() );
                 this.setState({ commitment: _commitment, secret: secret, isCommitmentExists: true, isTimerCompleted: false, countdown: _countdown + 1 });
             } else {
@@ -229,16 +232,15 @@ class CommitButton extends Component {
     } 
 
     async handleQuery() {
-        console.log("handleQuery")
+
         try {
             let labelName = this.props.name;
             const result = await apolloClient.query( {
                 query: GET_DOMAIN,
                 variables: {
-                    labelName
+                    labelName,
                 }
             }); 
-
             this.setState({ domain: result.data.domains[0] })
         } catch(e) {
             console.log(e);
@@ -310,6 +312,7 @@ class CommitButton extends Component {
         
         if(this.state.available === null) { 
             this.handleAvailable();
+            this.handleQuery(); 
         }
  
         if(this.state.commitment === null && !this.state.isMakingCommitment) {
@@ -340,8 +343,7 @@ class CommitButton extends Component {
             this.makeCommitment();
             this.handlePrice();
             this.handleBalance();
-        }
-        
+        } 
     }
  
     render() {  
@@ -369,10 +371,14 @@ class CommitButton extends Component {
                 </div>
             }  
 
-            {this.state.available == false && this.state.domain ? 
+            {this.state.domain ? 
                 <div className="container tableContent">
                     <table>
                         <tbody>
+                            <tr>
+                                <td>Label</td>
+                                <td>{this.state.domain.labelName}</td>
+                            </tr>
                             <tr>
                                 <td>Owner</td>
                                 <td>{this.state.domain.owner.id} {this.state.domain.owner.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
