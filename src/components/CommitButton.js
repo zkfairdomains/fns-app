@@ -146,13 +146,17 @@ class CommitButton extends Component {
 
             this.setState({ isRegistring: true, isRegistered: false });
 
+            // 551880000000000000n
+            console.log(parseEther(this.state.price.toString()))
+            console.log(this.state.price.toString())
+
             const _hash = await writeContract(wagmiConfig, {
                 abi: zkfRegisterControllerABI,
                 address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
                 functionName: "register",
                 args: [ this.props.name, this.props.owner, this.getDuration(), this.state.secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner,
-                value: parseEther("0.25")
+                value: this.state.price
             });
 
             toast.success("Your transaction has been sent.");
