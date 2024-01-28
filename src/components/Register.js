@@ -454,8 +454,8 @@ class CommitButton extends Component {
                                                     : <></>
                                                 }
                                                 
-                                                <button disabled={this.state.isRegistring || !this.state.isTimerCompleted ? "disabled": ""} className="btn btn-success align-self-center" onClick={(e)=> this.handleRegister() }>
-                                                    {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>Register</>} 
+                                                <button disabled={this.state.isRegistring || !this.state.isTimerCompleted ? "disabled": ""} className="btn btn-danger align-self-center" onClick={(e)=> this.handleRegister() }>
+                                                    {this.state.isRegistring ? <><img width={25} src={spinner} />Waiting Transaction</>: <>REGISTER</>} 
                                                 </button>
                                             </>
                                         }
