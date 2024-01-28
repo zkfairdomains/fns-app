@@ -16,7 +16,7 @@ export const wagmiConfig = createConfig({
     chains: chains,
     transports: { 
       [mainnet.id]: http(),
-      [goerli.id]: http("https://goerli.infura.io/v3/"+ process.env.REACT_APP_INFURA_KEY),
+      [goerli.id]: http("https://eth-goerli.g.alchemy.com/v2/"+ process.env.REACT_APP_ALCHEMY_KEY),
       [zkFair.id]: http(),
     },
     connectors: [
