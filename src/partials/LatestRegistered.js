@@ -13,10 +13,10 @@ function LatestRegistered() {
         dots: false,
         infinite: true,
         arrows:true,
-        speed: 500,
+        speed: 1000,
         slidesToShow: 5,
         slidesToScroll: 5,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 4000,
         responsive: [
             {
               breakpoint: 1024,
