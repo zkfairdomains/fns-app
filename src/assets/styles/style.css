@@ -6687,8 +6687,9 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
     .notFoundPage  p{font-size: 24px;}
 }
 
-.slick-arrow{width: 40px;height: 40px;z-index: 999;display: flex;justify-content: center;min-width: unset;text-indent: -9999px;}
-.slick-arrow.slick-next{right: 4px;background: url('../images/left-arrow-icon.svg') no-repeat center rgba(255,255,255,.5);transform: rotate(180deg);-webkit-transform: rotate(180deg);}
+.slick-arrow{width: 40px;height: 40px;z-index: 999;display: flex;justify-content: center;min-width: unset;text-indent: -9999px;top:50%;}
+.slick-arrow::before{display: none !important;}
+.slick-arrow.slick-next{right: 4px;background: url('../images/left-arrow-icon.svg') no-repeat center rgba(255,255,255,.5);transform: rotate(180deg);-webkit-transform: rotate(180deg);margin-top: -20px;}
 .slick-arrow.slick-prev{left: 4px;background: url('../images/left-arrow-icon.svg') no-repeat center rgba(255,255,255,.5);}
 
 .slick-slide img{border:1px solid rgba(255,255,255,.4);border-radius: 4px;overflow: hidden;}
