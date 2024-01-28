@@ -6678,7 +6678,7 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
 
 .notFoundPage{display: flex;align-items: center;justify-content: center;flex-direction: column;}
 .notFoundPage *{color:#fff;}
-.notFoundPage  h2{font-size: 13vw;text-align: center;}
+.notFoundPage  h2{font-size: 11vw;text-align: center;}
 .notFoundPage  p{font-size: 3vw;text-align: center;}
 @media(max-width:500px){
     .notFoundPage  h2{font-size: 54px;}
