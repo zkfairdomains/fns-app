@@ -1,18 +1,13 @@
-import { ethers, formatEther, keccak256, parseEther } from "ethers";
-import { apolloClient, wagmiConfig } from "../config";
+import { formatEther, parseEther } from "ethers";
+import { wagmiConfig } from "../config";
 import { readContract, writeContract } from '@wagmi/core'
 import { toast } from "react-toastify";
 import React, {Component} from 'react';
 import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
 import { waitForTransactionReceipt } from '@wagmi/core'
 import spinner from '../assets/images/spinner.svg';
-import moment from "moment";
 import { Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  } from "@apollo/client";
-import { GET_DOMAIN } from "../graphql/Domain";
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { getExpires, getTimeAgo, obscureName } from "../helpers/String";
 import { getBalance } from '@wagmi/core'
 

@@ -1,27 +1,10 @@
-import React, { useEffect } from "react";
-import searchIcon from '../assets/images/search-icon.svg';
-import loadericon from '../assets/images/loader-icon.svg';
-import { Navigate, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { isAvailable, isValidDomain, obscureName } from "../helpers/String";
-import DomainPrice from '../components/DomainPrice';
-import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
-import { useAccount, useChainId, useReadContract, useReadContracts, useWriteContract } from 'wagmi'
-import { useRef, useState } from 'react';
-import { toast } from 'react-toastify';
-import randomString from 'randomstring';
-import { ethers, keccak256 } from "ethers";
-import { hexToBytes, stringToBytes, toBytes } from "viem";
-import { wagmiConfig } from "../config";
-import { readContract, writeContract } from '@wagmi/core'
+import searchIcon from '../assets/images/search-icon.svg'; 
+import { useNavigate,  useParams } from "react-router-dom";
+import { isValidDomain, obscureName } from "../helpers/String"; 
+import { useAccount, useChainId } from 'wagmi'
 import Register from "../components/Register";
 import ConnectWalletButton from "../components/ConnectWalletButton";
-import { useLazyQuery } from "@apollo/client";
-import { GET_DOMAIN } from "../graphql/Domain";
-
-const zkfRegisterControllerConfig = {
-    address: process.env.REACT_APP_ZKFREGISTERCONTROLLER,
-    abi: zkfRegisterControllerABI
-};
+import React, { useState } from "react";  
  
 const Name = () => { 
  

@@ -16,10 +16,9 @@ function DomainPrice({available, name, duration}) {
         ...zkfRegisterControllerConfig,
         functionName: 'rentPrice',
         args: [name, duration],
-        chain: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id,
-        onError: (err) => { console.error(err) }
+        chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
     });
- 
+  
     if(error) toast.error(error.message)
     if(!available) return <></>
 

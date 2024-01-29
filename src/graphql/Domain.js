@@ -1,11 +1,11 @@
 import { gql } from "@apollo/client";
 
 export const GET_DOMAIN = gql`
-    query Domains( $labelName: String ) {
+    query Domains( $name: String ) {
         domains ( 
             first: 1
             where: {
-                labelName: $labelName
+                name: $name
             }
         )
         {

@@ -44,8 +44,7 @@ function Search() {
         ...zkfRegisterControllerConfig,
         functionName: 'available',
         args: [name],
-        chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id,
-        onError: (err) => { console.error(err) }
+        chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
     });
  
     if(error) toast.error(error.message)

@@ -8,15 +8,13 @@ import { waitForTransactionReceipt } from '@wagmi/core'
 import spinner from '../assets/images/spinner.svg';
 import moment from "moment";
 import { Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
-import {  } from "@apollo/client";
+import { Link } from "react-router-dom";  
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { getDateSimple, getExpires, getTimeAgo, getTokenId, obscureLabel, obscureName } from "../helpers/String";
 import { getBalance } from '@wagmi/core'
 
-class CommitButton extends Component {
+class Register extends Component {
      
     resolver = process.env.REACT_APP_PUBLICRESOLVER;
     data =  [];
@@ -234,11 +232,11 @@ class CommitButton extends Component {
     async handleQuery() {
 
         try {
-            let labelName = this.props.name;
+            let name = this.props.name + ".zkf";
             const result = await apolloClient.query( {
                 query: GET_DOMAIN,
                 variables: {
-                    labelName,
+                    name
                 }
             }); 
             this.setState({ domain: result.data.domains[0] })
@@ -263,9 +261,7 @@ class CommitButton extends Component {
     getDuration() {
         return this.state.duration * 60 * 60 * 24 * 365;
     }
-
-    
-
+ 
     async handlePrice() {
         console.log("handlePrice")
         let _price = false; 
@@ -368,7 +364,7 @@ class CommitButton extends Component {
                         </h3>
                     </div>
                 </div>
-            }  
+            }
 
             {this.state.domain ? 
                 <div className="container tableContent">
@@ -384,11 +380,11 @@ class CommitButton extends Component {
                             </tr>
                             <tr>
                                 <td>Owner</td>
-                                <td>{this.state.domain.owner.id} {this.state.domain.owner.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
+                                <td>{this.state.domain?.owner?.id} {this.state.domain?.owner?.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
                             </tr>
                             <tr>
                                 <td>Registrant</td>
-                                <td>{this.state.domain.registrant.id} {this.state.domain.registrant.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
+                                <td>{this.state.domain?.registrant?.id} {this.state.domain?.registrant?.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
                             </tr>
                             <tr>
                                 <td>Expires</td>
@@ -510,4 +506,4 @@ class CommitButton extends Component {
         
 }
 
-export default CommitButton;
+export default Register;
