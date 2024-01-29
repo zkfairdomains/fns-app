@@ -6086,8 +6086,8 @@ main section .banner h2 span {
 }
 @media (max-width: 768px) {
     main section .banner h2 {
-        font-size: 1.75rem;
-        line-height: 2rem;
+        font-size: 36px;
+        line-height: 46px;
     }
     main section .banner h2 br {
         display: none;
