@@ -11,7 +11,7 @@ function LatestRegistered() {
     var settings = {
         autoplay: true,
         dots: false,
-        infinite: true,
+        infinite: false,
         arrows:true,
         speed: 1000,
         slidesToShow: 5,
