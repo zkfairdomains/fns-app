@@ -171,8 +171,12 @@ export function fromWei(value, decimals = 18) {
     return ethers.formatUnits(value, decimals);
 }
 
-export default function isZero(hexNumberString) {
+export function isZero(hexNumberString) {
     return /^0x0*$/.test(hexNumberString);
+}
+
+export function getOneYearDuration() {
+    return 1 * 60 * 60 * 24 * 365;
 }
  
  
