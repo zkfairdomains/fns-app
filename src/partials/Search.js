@@ -7,13 +7,13 @@ import { useReadContract } from 'wagmi'
 import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { isValidDomain, obscureName } from "../helpers/String";
+import { isValidDomain, obscureName, getOneYearDuration } from "../helpers/String";
 import DomainPrice from '../components/DomainPrice';
 import { Link } from 'react-router-dom'; 
 
 function Search() {
      
-    const yearInSeconds = 31556926; 
+    const yearInSeconds = getOneYearDuration(); 
     const inputRef = useRef("")
     const [name, setName] = useState(""); 
     const [valid, setValid] = useState(false); 

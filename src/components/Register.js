@@ -11,7 +11,7 @@ import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";  
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import { getDateSimple, getExpires, getTimeAgo, getTokenId, obscureLabel, obscureName } from "../helpers/String";
+import { getDateSimple, getExpires, getOneYearDuration, getTimeAgo, getTokenId, obscureLabel, obscureName } from "../helpers/String";
 import { getBalance } from '@wagmi/core'
 
 class Register extends Component {
@@ -148,7 +148,7 @@ class Register extends Component {
 
             console.log(_hash);
  
-            const recepient = await waitForTransactionReceipt(wagmiConfig, {  hash: _hash });
+            const recepient = await waitForTransactionReceipt(wagmiConfig, { hash: _hash });
 
             console.log(recepient);
 
@@ -259,7 +259,7 @@ class Register extends Component {
     }
 
     getDuration() {
-        return this.state.duration * 60 * 60 * 24 * 365;
+        return this.state.duration * getOneYearDuration();
     }
  
     async handlePrice() {
