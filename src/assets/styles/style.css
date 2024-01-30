@@ -20,7 +20,7 @@ main {
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-bottom: 80px;
+    padding-bottom: 55px;
 }
 main section {
     height: 100%;
