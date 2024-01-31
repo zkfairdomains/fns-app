@@ -3,6 +3,8 @@ import Logo from '../assets/images/zfknameservice-logo.svg';
 import ConnectWalletButton from "../components/ConnectWalletButton"; 
 import { Link, NavLink } from 'react-router-dom';
 import { useRef } from "react";
+import { Dropdown,NavDropdown } from "react-bootstrap";
+
 
 function Header() {
 
@@ -37,13 +39,13 @@ function Header() {
             <div className="controls-content">
                 <nav>
                     <ul className="d-flex">
-                        <li><Link to="/">Home</Link></li>
                         <li><Link to="/account">My Domains</Link></li>
+                        <NavDropdown as={"li"} title="Marketplaces">
+                            <NavDropdown.Item target="_blank" href="https://element.market/collections/zkfair-name-service-56aafc">Element</NavDropdown.Item>
+                            <NavDropdown.Item target="_blank" href="https://alienswap.xyz/collection/zkfair/zk-fair-name-service-e32d">AlienSwap</NavDropdown.Item>
+                        </NavDropdown>
                     </ul>
                 </nav>
-                <div className="network-select dropdown">
-                    
-                </div>
             </div>
              <ConnectWalletButton></ConnectWalletButton>
              <a onClick={ (e)=> openMobilMenu(e) }  className="mm" href="#"><span></span><span> </span><span></span></a>
