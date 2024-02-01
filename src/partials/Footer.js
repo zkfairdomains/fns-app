@@ -2,6 +2,7 @@ import twittericon from '../assets/images/twitter.svg' ;
 import githubicon from '../assets/images/githublogo.svg' ;
 import discordicon from '../assets/images/discordicon.svg' ;
 import etherscann from '../assets/images/etherscan-logo.png' ;
+import elementmarket from '../assets/images/element.svg' ;
 import MetaMaskLogo from '../assets/images/metamask.svg';
 
 import { useSwitchChain } from 'wagmi';
@@ -22,6 +23,7 @@ function Footer() {
                 </div>
                 <div className='footerRight'>
                     <button className="wallet-connect" onClick={() => switchChain({ chainId: Number(process.env.REACT_APP_SUPPORTED_CHAIN_ID) }) }>Add to Metamask <img src={MetaMaskLogo} alt="loading..." /></button>
+                
                     <div className="socialMedia">
                         <ul className='d-flex'>
                             <li>
@@ -41,6 +43,11 @@ function Footer() {
                             <li className='ms-3'>
                                 <a href={process.env.REACT_APP_CONTRACT_URL} target="_blank" rel="noreferrer" className='imgwhiteredbg'>
                                     <img className='imgwhite' src={etherscann} alt="Contracts" />
+                                </a>
+                            </li>
+                            <li className='ms-3 p-0 m-0'>
+                                <a href={process.env.REACT_APP_ELEMENTMARKET_URL} target="_blank" rel="noreferrer" className=' border-0 p-0 m-0'>
+                                    <img className='p-0 m-0' width={24} height={24} src={elementmarket} alt="ZKFair Domains on Element.Market" />
                                 </a>
                             </li>
                         </ul>

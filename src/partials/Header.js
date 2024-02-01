@@ -3,6 +3,8 @@ import Logo from '../assets/images/zfknameservice-logo.svg';
 import ConnectWalletButton from "../components/ConnectWalletButton"; 
 import { Link, NavLink } from 'react-router-dom';
 import { useRef } from "react";
+import elementmarket from '../assets/images/element-logo-4.png'
+import alienswap from '../assets/images/AlienSwap_logo_color.png'
 import { Dropdown,NavDropdown } from "react-bootstrap";
 
 
@@ -41,8 +43,13 @@ function Header() {
                     <ul className="d-flex">
                         <li><Link to="/account">My Domains</Link></li>
                         <NavDropdown as={"li"} title="Marketplaces">
-                            <NavDropdown.Item target="_blank" href="https://element.market/collections/zkfair-name-service-56aafc">Element</NavDropdown.Item>
-                            <NavDropdown.Item target="_blank" href="https://alienswap.xyz/collection/zkfair/zk-fair-name-service-e32d">AlienSwap</NavDropdown.Item>
+                            <NavDropdown.Item className="fs-5" target="_blank" href="https://element.market/collections/zkfair-name-service-56aafc">
+                                <img width={100} height={24} src={elementmarket} className="align-center" alt="ZKFair Domains on Element.Market" />
+                       
+                            </NavDropdown.Item>
+                            <NavDropdown.Item target="_blank" href="https://alienswap.xyz/collection/zkfair/zk-fair-name-service-e32d">
+                                <img width={100} height={24} src={alienswap} alt="ZKFair Domains on Element.Market" />
+                            </NavDropdown.Item>
                         </NavDropdown>
                     </ul>
                 </nav>
