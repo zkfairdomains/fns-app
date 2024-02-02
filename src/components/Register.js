@@ -490,6 +490,9 @@ class Register extends Component {
                                 <p>
                                 <Link className="btn btn-success btn-lg" to={"/account"}>Go to My Domains</Link>
                                 </p>
+                                <p>
+                                    <small>Please note that It may take time for your domain to appear in "My Domains" page. This doesn't mean you could not minted. Data indexer service may delay a bit time</small>
+                                </p>
                             </Modal.Body>
                             <Modal.Footer>
                                 <button onClick={()=> this.setState({ isRegistered: false })} className="btn btn-default">Close</button>
