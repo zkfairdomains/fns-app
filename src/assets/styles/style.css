@@ -5718,7 +5718,7 @@ header {
     padding: 0;
     box-shadow: 0 1px 6px 0 #fff;
     position: relative;
-    z-index: 8;
+    z-index: 888;
 }
 header > div > a{text-decoration: none;}
 header h1 {
@@ -5736,6 +5736,9 @@ header h1 span{
     text-decoration: none;
     font-size: 20px;
     margin-top: 3px;
+}
+.dropdown > div {
+    padding: 0;
 }
 @media (max-width: 768px) {
     header {
