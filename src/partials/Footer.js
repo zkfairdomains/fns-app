@@ -45,11 +45,6 @@ function Footer() {
                                     <img className='imgwhite' src={etherscann} alt="Contracts" />
                                 </a>
                             </li>
-                            <li className='ms-3 p-0 m-0'>
-                                <a href={process.env.REACT_APP_ELEMENTMARKET_URL} target="_blank" rel="noreferrer" className=' border-0 p-0 m-0'>
-                                    <img className='p-0 m-0' width={24} height={24} src={elementmarket} alt="ZKFair Domains on Element.Market" />
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
