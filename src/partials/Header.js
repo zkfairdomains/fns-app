@@ -42,15 +42,6 @@ function Header() {
                 <nav>
                     <ul className="d-flex">
                         <li><Link to="/account">My Domains</Link></li>
-                        <NavDropdown as={"li"} title="Marketplaces">
-                            <NavDropdown.Item className="fs-5" target="_blank" href="https://element.market/collections/zkfair-name-service-56aafc">
-                                <img width={100} height={24} src={elementmarket} className="align-center" alt="ZKFair Domains on Element.Market" />
-                       
-                            </NavDropdown.Item>
-                            <NavDropdown.Item target="_blank" href="https://alienswap.xyz/collection/zkfair/zk-fair-name-service-e32d">
-                                <img width={100} height={24} src={alienswap} alt="ZKFair Domains on Element.Market" />
-                            </NavDropdown.Item>
-                        </NavDropdown>
                     </ul>
                 </nav>
             </div>
