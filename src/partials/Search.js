@@ -50,7 +50,7 @@ function Search() {
     if(error) toast.error(error.message)
      
     return ( 
-        <div className="search-content"> 
+        <div className="search-content container pe-0 ps-0"> 
             <form onSubmit={(e)=> { e.preventDefault(); return false; }}>
                 <img src={searchIcon} alt="" /><input type="text" ref={inputRef} placeholder="Search your domain name" />
                 <span className='chainText'>.zkf</span>

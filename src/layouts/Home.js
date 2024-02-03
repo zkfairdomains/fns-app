@@ -10,7 +10,7 @@ export default function Home() {
             <main>
             <Header />
             <section>
-                <div className='container'>  
+                <div className='container-fluid'>  
                     <Outlet />
                 </div>
             </section>
