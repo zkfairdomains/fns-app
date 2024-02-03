@@ -32,7 +32,7 @@ function LatestRegistered() {
         <>
         { loading ? <div className="tableContent text-white"> Loading... </div> : 
             <div className="container text-white pt-4 pe-0 ps-0">
-                <h2 className="mb-3 text-center">Recently Claimed</h2>
+                <h3 className="mb-3 text-center">Recently Claimed</h3>
                 <Slider {...settings}>
                             { data.domains && data.domains.map( (domain) => (
                                 <div key={domain.id} className="p-2">
