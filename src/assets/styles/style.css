@@ -6652,7 +6652,7 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
   }
 
  table thead td, table thead th{font-size: 20px;}
- table tr td,table tr th{color:#fff;border:1px solid #fff;padding:10px;background:rgba(255,255,255,.2);font-family:'Arial';font-size:14px}
+ table tr td,table tr th{color:#fff;border:1px solid #fff;padding:10px;background:rgba(255,255,255,.2);font-family:'Arial';font-size:18px}
  table tr th{font-weight:bold;}
  table tr td button{height: 30px;font-size: 16px !important;padding: 0;}
 
@@ -6685,14 +6685,14 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
 
   @media(max-width:768px){
     .modal table{min-width: auto !important;}
-    .modal table,.modal table tr, .modal table td,.modal table th{display: block;}
+    .modal table,.modal table tr, .modal table td,.modal table th{display: block;font-size: 20px;}
     .modal table thead{display: none;}
     .modal table tr:nth-child(odd){background:rgba(0,0,0,.05);}
     .modal table tr{width:100%;}
     .modal table tbody{display:block;}
-    .modal table tr td:first-child::before{content:"Name";display:block;margin-bottom: 3px;font-size: 18px;}
-    .modal table tr td:nth-child(2):before{content:"Expires";display:block;margin-bottom: 3px;font-size: 18px;}
-    .modal table tr td:last-child:before{content:"Extend";display:block;margin-bottom: 3px;font-size: 18px;}
+    .modal table tr td:first-child::before{content:"Name";display:block;margin-bottom: 3px;font-size: 24px;}
+    .modal table tr td:nth-child(2):before{content:"Expires";display:block;margin-bottom: 3px;font-size: 24px;}
+    .modal table tr td:last-child:before{content:"Extend";display:block;margin-bottom: 3px;font-size: 24px;}
     .modal .tabContent{overflow-x: hidden !important;}
 }
 
