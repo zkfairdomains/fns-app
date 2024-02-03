@@ -6080,10 +6080,10 @@ main section .banner {
     }
 }
 main section .banner h2 {
-    line-height: calc(1.325rem + 1.4vw);
-    font-size: calc(1.325rem + 1.1vw);
+    line-height: calc(1.325rem + 1.7vw);
+    font-size: calc(1.325rem + 1.6vw);
     color: #fff;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 main section .banner h2 span {
     color: #e13022;
@@ -6147,7 +6147,8 @@ main section .banner-bg {
     background-color: #e13022;
     color: #fff;
     width: 150px;
-    font-size: 1.875rem !important;
+    font-size: 16px !important;
+    font-weight: 700;
     height: 100%;
     border-radius: 0;
     transition: 0.3s;
@@ -6454,7 +6455,7 @@ ul {
     max-width: 100%;
 }
 .chainText {
-    font-size: 26px;
+    font-size: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
