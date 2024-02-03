@@ -11,7 +11,14 @@ import { Dropdown,NavDropdown } from "react-bootstrap";
 function Header() {
 
     //const menuRef = useRef();
-
+    function closeMobileMenu(e){
+        var menuIcon = document.getElementsByClassName("mm");
+        var bodytag = document.getElementsByTagName("body")
+        var controlsContent = document.getElementsByClassName('controls-content');
+        bodytag[0].classList.remove('menuOn');
+        menuIcon[0].classList.remove('active');
+        controlsContent[0].classList.remove('active');
+    }
     function openMobilMenu(e) {
         
         var menuIcon = document.getElementsByClassName("mm");
@@ -41,7 +48,7 @@ function Header() {
             <div className="controls-content">
                 <nav>
                     <ul className="d-flex">
-                        <li><Link to="/account">My Domains</Link></li>
+                        <li><Link onClick={(e) => closeMobileMenu(e)} to="/account">My Domains</Link></li>
                     </ul>
                 </nav>
             </div>
