@@ -6685,17 +6685,18 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
 
   @media(max-width:768px){
     .modal table{min-width: auto !important;}
-    .modal table,.modal table tr, .modal table td,.modal table th{display: block;font-size: 20px;}
+    .modal table,.modal table tr, .modal table th{display: block;font-size: 20px;}
     .modal table thead{display: none;}
+      .modal table td{display:flex;flex-direction:column;justify-content:center;text-align: center;font-size: 20px}
     .modal table tr:nth-child(odd){background:rgba(0,0,0,.05);}
     .modal table tr{width:100%;}
     .modal table tbody{display:block;}
-    .modal table tr td:first-child::before{content:"Name";display:block;margin-bottom: 3px;font-size: 24px;}
-    .modal table tr td:nth-child(2):before{content:"Expires";display:block;margin-bottom: 3px;font-size: 24px;}
-    .modal table tr td:last-child:before{content:"Extend";display:block;margin-bottom: 3px;font-size: 24px;}
+    .modal table tr td:first-child::before{content:"Name";display:block;margin-bottom: 6px;font-size: 24px;}
+    .modal table tr td:nth-child(2):before{content:"Expires";display:block;margin-bottom: 6px;font-size: 24px;}
+    .modal table tr td:last-child:before{content:"Extend";display:block;margin-bottom: 6px;font-size: 24px;}
     .modal .tabContent{overflow-x: hidden !important;}
+    .modal .customCounter{margin-bottom:10px}
 }
-
 
 .notFoundPage{display: flex;align-items: center;justify-content: center;flex-direction: column;}
 .notFoundPage *{color:#fff;}
