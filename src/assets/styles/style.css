@@ -6682,6 +6682,21 @@ button{border-width: 1px;font-family:bigsd, Arial, Helvetica, sans-serif !import
   .modal table{margin-bottom: 20px;}
   .modal .btn-close{max-width: 40px;max-height: 40px ;}
 
+
+  @media(max-width:768px){
+    .modal table{min-width: auto !important;}
+    .modal table,.modal table tr, .modal table td,.modal table th{display: block;}
+    .modal table thead{display: none;}
+    .modal table tr:nth-child(odd){background:rgba(0,0,0,.05);}
+    .modal table tr{width:100%;}
+    .modal table tbody{display:block;}
+    .modal table tr td:first-child::before{content:"Name";display:block;margin-bottom: 3px;font-size: 18px;}
+    .modal table tr td:nth-child(2):before{content:"Expires";display:block;margin-bottom: 3px;font-size: 18px;}
+    .modal table tr td:last-child:before{content:"Extend";display:block;margin-bottom: 3px;font-size: 18px;}
+    .modal .tabContent{overflow-x: hidden !important;}
+}
+
+
 .notFoundPage{display: flex;align-items: center;justify-content: center;flex-direction: column;}
 .notFoundPage *{color:#fff;}
 .notFoundPage  h2{font-size: 11vw;text-align: center;}
