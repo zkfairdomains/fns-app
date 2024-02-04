@@ -6217,7 +6217,7 @@ main section .banner-bg {
 .accordion ul li button,
 .itemlist li button {
     padding: 3px 3px !important;
-    font-size: 1.125rem !important;
+    font-size: 12px !important;
 }
 @media (max-width: 768px) {
     select {
@@ -6605,9 +6605,10 @@ ul {
 .white-content{background-color:#fff ;border-radius: 4px;padding: 20px;}
 .countdowncontent{display: flex;justify-content: center;align-items: center;flex-direction: column;}
 .countdowncontent > div{display: flex;align-self: center;justify-self: center;margin-bottom: 10px;color:#fff;}
-.countdowncontent > span{font-size: 24px;}
+.countdowncontent > span{font-size: 18px;}
+.alert h3{font-size: 20px;}
 @media(max-width:768px){
-    .countdowncontent > span{font-size: 18px;}
+    .countdowncontent > span{font-size: 14px;}
     
 }
 .Toastify{z-index: 9999;}
