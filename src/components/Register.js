@@ -11,7 +11,7 @@ import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";  
 import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import { getDateSimple, getExpires, getOneYearDuration, getTimeAgo, getTokenId, obscureLabel, obscureName } from "../helpers/String";
+import { getDateSimple, getExpires, getLabelHash, getNameHash, getOneYearDuration, getTimeAgo, getTokenId, obscureLabel, obscureName } from "../helpers/String";
 import { getBalance } from '@wagmi/core'
 import { goerli, zkFair } from 'wagmi/chains'
 
@@ -381,6 +381,14 @@ class Register extends Component {
                             <tr>
                                 <td>Token ID</td>
                                 <td>{getTokenId( this.state.domain.labelName )}</td>
+                            </tr>
+                            <tr>
+                                <td>Name Hash</td>
+                                <td>{getNameHash( this.state.domain.labelName  ) }</td>
+                            </tr>
+                            <tr>
+                                <td>Label Hash</td>
+                                <td>{getLabelHash( this.state.domain.labelName )}</td>
                             </tr>
                             <tr>
                                 <td>Owner</td>
