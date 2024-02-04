@@ -24,7 +24,7 @@ function Footer() {
                 <div className='footerRight'>
                     <button className="wallet-connect" onClick={() => switchChain({ chainId: Number(process.env.REACT_APP_SUPPORTED_CHAIN_ID) }) }>Add to Metamask <img src={MetaMaskLogo} alt="loading..." /></button>
                 
-                    <div className="socialMedia">
+                    <div className="zkfsocialMedia">
                         <ul className='d-flex'>
                             <li>
                                 <a href={process.env.REACT_APP_TWITTER_URL} target="_blank" rel="noreferrer">

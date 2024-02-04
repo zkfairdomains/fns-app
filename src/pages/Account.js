@@ -18,7 +18,7 @@ const Account = () => {
   const { data, loading, error, refetch } = useQuery(GET_MY_DOMAINS, { variables: { owner, now }, notifyOnNetworkStatusChange: true });
   
   if (!isConnected)
-    return ( <div className="alert alert-warning container">You need to connect wallet first to see your domains. <ConnectWalletButton></ConnectWalletButton></div> )
+    return ( <div className="alert alert-warning container d-flex justify-content-between align-items-center">You need to connect wallet first to see your domains. <ConnectWalletButton></ConnectWalletButton></div> )
 
  
   if (error) return <div className="container alert alert-danger"> {error.message} </div>
@@ -28,7 +28,7 @@ const Account = () => {
      
       <div className="container text-white ">
           <h2>My Domains</h2> 
-          <div className="d-flex justify-content-between mb-3">
+          <div className="d-flex justify-content-between mb-3 align-items-center">
             <p>
               Please note that sometimes it takes time to view/update your domains in this page because of data indexer delay.
             </p>

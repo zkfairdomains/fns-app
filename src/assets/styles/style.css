@@ -145,6 +145,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+/* body *{color: #000 !important;} */
 hr {
     margin: 1rem 0;
     color: inherit;
@@ -5722,19 +5723,22 @@ header {
 }
 header > div > a{text-decoration: none;}
 header h1 {
-    max-width: 75px;
+    max-width: 130px;
     display: flex;
+    width: 100%;
     align-items: center;
+   ;
 }
 header h1 img {
-    width: 100%;
+    width: 65px;
     display: block;
     margin-top: 4px;
+   
 }
 header h1 span{
     color:#fff;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 14px;
     margin-top: 3px;
 }
 .dropdown > div {
@@ -5749,7 +5753,8 @@ header h1 span{
         width: 100%;
     }
     header .wallet-connect{margin-right: 10px;min-width: 140px;font-size: 13px !important;}
-    header .wallet-connect img{display: none;}
+    header .wallet-connect img{}
+    header h1 img{max-width: 55px;}
 }
 header .container-fluid > div,
 header .container-lg > div,
@@ -5811,7 +5816,7 @@ header .container-md > div nav ul li a,
 header .container-sm > div nav ul li a,
 header .container-xl > div nav ul li a,
 header .container-xxl > div nav ul li a {
-    font-size: 14px;
+    font-size: 16px;
     color: #fff;
     text-decoration: none;
 }
@@ -5965,10 +5970,11 @@ header .mm.active span:last-child {
     border-radius: 4px;
     border: 0;
     display: flex;
-    font-size: 16px !important;
+    font-size: 14px !important;
     transition: 0.3s;
     min-width: 190px;
     justify-content: center;
+    align-items: center;
 }
 .wallet-connect img {
     display: block;
@@ -6010,6 +6016,7 @@ footer > div{
   align-items: center;
   font-size: 14px;
 }
+.footerRight button.wallet-connect{min-width: 170px;}
 .footerRight button img{
   max-width: 20px;
 }
@@ -6021,7 +6028,8 @@ footer > div{
   
   
   .footNav,.footNav + div{width: 100%;}
-  .socialMedia{width: 100%;display: flex;justify-content: flex-end;padding: 12px 0;}
+  .zkfsocialMedia{width: 100%;display: flex;justify-content: flex-end;padding: 12px 0;}
+  .footerRight button.wallet-connect{min-width: 184px;}
 }
 footer .footNav ul li {
     padding: 0 10px;
@@ -6050,7 +6058,7 @@ footer .footNav ul li::before {
 footer .footNav ul li:first-child::before {
     display: none;
 }
-footer .socialMedia li a img {
+footer .zkfsocialMedia li a img {
     display: flex;
     width: 30px;
 }
@@ -6080,7 +6088,7 @@ main section .banner {
     }
 }
 main section .banner h2 {
-    line-height: calc(1.325rem + 1.7vw);
+    line-height: calc(1.325rem + 2.2vw);
     font-size: calc(1.325rem + 1.6vw);
     color: #fff;
     margin-bottom: 35px;
@@ -6217,7 +6225,7 @@ main section .banner-bg {
 .accordion ul li button,
 .itemlist li button {
     padding: 3px 3px !important;
-    font-size: 12px !important;
+    font-size: 16px !important;
 }
 @media (max-width: 768px) {
     select {
@@ -6499,7 +6507,11 @@ ul {
 /*search result inner sizing*/
 .domainName {width: 100%;}
 .pricing{min-width: 30%;display: flex;justify-content: flex-end;}
-.resultbutton button{min-width: 170px;}
+.pricing span {
+    font-size: 17px;
+    letter-spacing: -1px;
+}
+
 @media(max-width:768px){
   .domainName{width: 50%;}
   .pricing{width: 50%;}
@@ -6716,3 +6728,6 @@ button{border-width: 1px;font-family:rbtm, Arial, Helvetica, sans-serif !importa
 .slick-arrow.slick-prev{left: 4px;background: url('../images/left-arrow-icon.svg') no-repeat center rgba(255,255,255,.5);}
 
 .slick-slide img{border:1px solid rgba(255,255,255,.4);border-radius: 4px;overflow: hidden;}
+w3m-modal {
+    z-index: 9999;
+}
