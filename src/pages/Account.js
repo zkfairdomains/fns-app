@@ -18,7 +18,7 @@ const Account = () => {
   const { data, loading, error, refetch } = useQuery(GET_MY_DOMAINS, { variables: { owner, now }, notifyOnNetworkStatusChange: true });
   
   if (!isConnected)
-    return ( <div className="alert alert-warning container">You need to connect wallet first to see your domain. <ConnectWalletButton></ConnectWalletButton></div> )
+    return ( <div className="alert alert-warning container">You need to connect wallet first to see your domains. <ConnectWalletButton></ConnectWalletButton></div> )
 
  
   if (error) return <div className="container alert alert-danger"> {error.message} </div>
