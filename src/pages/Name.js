@@ -5,6 +5,7 @@ import { useAccount, useChainId } from 'wagmi'
 import Register from "../components/Register";
 import ConnectWalletButton from "../components/ConnectWalletButton";
 import React, { useState } from "react";  
+import Domain from '../components/Domains';
  
 const Name = () => { 
  
@@ -22,7 +23,14 @@ const Name = () => {
                 {!isValidDomain(name) ?  <IsInvalid name={name} /> 
                     : 
                     <> 
-                       { !isConnected || SUPPORTED_CHAIN_ID !== chainId ?  <div className="mt-3"> <ConnectWalletButton /> </div> : <Register name={name} duration={3156600} owner={registrar} /> }
+                        <Domain name={name} />
+                        { !isConnected || SUPPORTED_CHAIN_ID !== chainId ?  
+                            <ConnectWalletButton /> 
+                            : 
+                            <>
+                            <Register name={name} duration={3156600} owner={registrar} /> 
+                            </>
+                        }
                     </> 
                 } 
             </div>
