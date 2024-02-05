@@ -350,72 +350,7 @@ class Register extends Component {
         
         return (
             <> 
-            {this.state.isAvailablePending ? 
-                <> 
-                    <div className="container mt-3">
-                        <div className="alert alert-info text-center">
-                            <h3> Searching...</h3>
-                        </div> 
-                    </div>
-                </>
-                : 
-                <div className="container mt-3"> 
-                    <div className={this.state.available ? "alert alert-success text-center": "alert alert-danger text-center" }>
-                        <h3>  
-                            <>
-                                { this.state.available ? <> <b>{obscureLabel(this.props.name, 30)}.zkf</b> is available to claim 🥳 </>: <><b>{obscureLabel(this.props.name, 30)}.zkf</b> is not available to claim 🙁</>}
-                            </> 
-                        </h3>
-                    </div>
-                </div>
-            }
-
-            {this.state.domain ? 
-                <div className="container tableContent">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Label</td>
-                                <td>{this.state.domain.labelName}</td>
-                            </tr>
-                            <tr>
-                                <td>Token ID</td>
-                                <td>{getTokenId( this.state.domain.labelName )}</td>
-                            </tr>
-                            <tr>
-                                <td>Name Hash</td>
-                                <td>{getNameHash( this.state.domain.labelName  ) }</td>
-                            </tr>
-                            <tr>
-                                <td>Label Hash</td>
-                                <td>{getLabelHash( this.state.domain.labelName )}</td>
-                            </tr>
-                            <tr>
-                                <td>Owner</td>
-                                <td>{this.state.domain?.owner?.id} {this.state.domain?.owner?.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
-                            </tr>
-                            <tr>
-                                <td>Registrant</td>
-                                <td>{this.state.domain?.registrant?.id} {this.state.domain?.registrant?.id.toString() === this.props.owner.toString() ? <>(You)</>: <></>}</td>
-                            </tr>
-                            <tr>
-                                <td>Expires</td>
-                                <td>{getExpires(this.state.domain.expiryDate)} - { getDateSimple(this.state.domain.expiryDate) }</td>
-                            </tr>
-                            <tr>
-                                <td>Created</td>
-                                <td>{getTimeAgo(this.state.domain.createdAt)} - { getDateSimple(this.state.domain.createdAt) } </td>
-                            </tr>
-                            <tr>
-                                <td>Registered</td>
-                                <td>{getTimeAgo(this.state.domain.registeredAt)} - { getDateSimple(this.state.domain.registeredAt) } </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                : <> </>
-            }
-
+              
             {this.state.available ? 
                 <div className="container">
                     <div className="d-flex flex-column justify-content-center countdowncontent">
@@ -445,7 +380,7 @@ class Register extends Component {
                                     <>
                                         { !this.state.isCommitted && !this.state.isCommitmentExists ?  
                                             <> 
-                                                <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
+                                                <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger f-20 mt-3 mb-3" onClick={(e)=> this.handleCommit() }>
                                                     {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
                                                 </button>  
                                             </> : 
