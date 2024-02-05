@@ -26,15 +26,15 @@ const Account = () => {
   return (
     <>  
      
-      <div className="container text-white ">
+      <div className="container myAccount ">
           <h2>My Domains</h2> 
           <div className="d-flex justify-content-between mb-3 align-items-center">
             <p>
               Please note that sometimes it takes time to view/update your domains in this page because of data indexer delay.
             </p>
-            <button disabled={ loading ? "disabled": ""} className="btn btn-sm btn-secondary text-white" onClick={() => refetch()}>{ loading ? <img width={25} src={spinner} /> : <> Refresh </>} </button>
+            <button disabled={ loading ? "disabled": ""} className="btn btn-sm btn-secondary" onClick={() => refetch()}>{ loading ? <img width={25} src={spinner} /> : <> Refresh </>} </button>
           </div> 
-          { loading ? <div className="tableContent text-white"> Loading... </div> 
+          { loading ? <div className="tableContent"> <span>Loading...</span></div> 
           :
           <div className="tableContent">
              {data.domains == null || data.domains.length < 1 ? <div className="alert alert-info">No domain(s) found</div>: <></>}
