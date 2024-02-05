@@ -445,7 +445,7 @@ class Register extends Component {
                                     <>
                                         { !this.state.isCommitted && !this.state.isCommitmentExists ?  
                                             <> 
-                                                <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger" onClick={(e)=> this.handleCommit() }>
+                                                <button disabled={this.state.isCommiting ? "disabled": ""} className="btn btn-danger f-20 mt-3 mb-3" onClick={(e)=> this.handleCommit() }>
                                                     {this.state.isCommiting ? <><img width={25} src={spinner} /> Waiting Transaction</>: <>Request to Register</>} 
                                                 </button>  
                                             </> : 

@@ -1,5 +1,5 @@
 import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
-
+import loadericon from '../assets/images/loader-icon.svg';
 import { useReadContract } from 'wagmi'
 import { toast } from 'react-toastify'; 
 import { fromWei } from '../helpers/String';
@@ -23,7 +23,7 @@ function DomainPrice({available, name, duration}) {
     if(!available) return <></>
 
     if(isPending) {
-        <span className='me-3'>...</span>
+        <span className='me-3'><img src={loadericon} alt="" /></span>
     } else {
         return ( 
             <> 

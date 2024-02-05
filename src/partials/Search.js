@@ -50,7 +50,7 @@ function Search() {
     if(error) toast.error(error.message)
      
     return ( 
-        <div className="search-content container pe-0 ps-0"> 
+        <div className="search-content container pe-0 ps-0 mb-3"> 
             <form onSubmit={(e)=> { e.preventDefault(); return false; }}>
                 <img src={searchIcon} alt="" /><input type="text" ref={inputRef} placeholder="Search your domain name" />
                 <span className='chainText'>.zkf</span>
@@ -81,7 +81,7 @@ function Search() {
                             </div>
                             <div className='resultbutton d-flex justify-content-end'> 
                                 <Link to={"/name/"+ name +".zkf"}>
-                                    <button  className={available ? "green": "red"}>{ available ? "Available to Register": "Not Available"}</button>
+                                    <button  className={available ? "green": "red"}>{ available ? "Available": "Not Available"}</button>
                                 </Link>
                             </div>
                         </li>
