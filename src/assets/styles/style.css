@@ -5738,7 +5738,7 @@ header h1 img {
 header h1 span{
     color:#fff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 3px;
 }
 .dropdown > div {
@@ -5752,7 +5752,7 @@ header h1 span{
         max-width: 100%;
         width: 100%;
     }
-    header .wallet-connect{margin-right: 10px;min-width: 140px;font-size: 13px !important;}
+    header .wallet-connect{margin-right: 10px;min-width: 165px;font-size: 14px !important;height: 40px;letter-spacing: -1px;}
     header .wallet-connect img{}
     header h1 img{max-width: 55px;}
 }
@@ -5981,6 +5981,9 @@ header .mm.active span:last-child {
     width: 30px;
     margin-left: 4px;
 }
+@media(max-width:768px){
+    .wallet-connect img{width: 20px;}
+}
 .wallet-connect:hover {
     box-shadow: 0 1px 16px 0 #e13022;
 }
@@ -6145,7 +6148,7 @@ main section .banner-bg {
 }
 @media (max-width: 768px) {
     .search-content form input {
-        font-size: 1.375rem;
+        font-size: 13px;
     }
 }
 .search-content form select {
@@ -6168,7 +6171,7 @@ main section .banner-bg {
 }
 @media (max-width: 768px) {
     .search-content form button {
-        font-size: 1.375rem !important;
+        font-size: 14px !important;
     }
 }
 .search-content form img {
@@ -6226,12 +6229,21 @@ main section .banner-bg {
 .itemlist li button {
     padding: 3px 3px !important;
     font-size: 16px !important;
+    width: 145px;
+    letter-spacing: -1px;
 }
 @media (max-width: 768px) {
     select {
         font-size: 1.375rem;
         width: 90px;
     }
+    .search-content .search-result-content ul li button,
+.accordion ul li button,
+.itemlist li button {
+ 
+    width: 100%;
+    
+}
 }
 .preloader {
     background-color: #fff;
@@ -6513,9 +6525,10 @@ ul {
 }
 
 @media(max-width:768px){
-  .domainName{width: 50%;}
-  .pricing{width: 50%;}
+  .domainName{width: 100%;}
+  .pricing{width: 100%;}
 .resultbutton,.resultbutton a{width: 100%;}
+.chainText{font-size: 14px;padding: 5px;}
 }
 /*search result inner sizing*/
 
