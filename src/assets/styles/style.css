@@ -52,8 +52,9 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #000;
+    background-color: #fff;
     z-index: 55;
+    border-top:1px solid #000;
 }
 :root {
     --bs-blue: #0d6efd;
@@ -137,10 +138,10 @@ body {
     margin: 0;
     font: 400 16px / var(--bs-body-line-height) rbtm, Arial, Helvetica, sans-serif !important;
     text-align: var(--bs-body-text-align);
-    background: #000 !important;
+    background: #fff !important;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
-    color: #fff;
+    color: #000;
     background-size: 70% !important;
     display: flex;
     flex-direction: column;
@@ -5717,9 +5718,10 @@ body > footer {
 }
 header {
     padding: 0;
-    box-shadow: 0 1px 6px 0 #fff;
+    box-shadow: 0 0px 9px 0 rgba(0,0,0,.4);
     position: relative;
     z-index: 888;
+    background-color: #fff;
 }
 header > div > a{text-decoration: none;}
 header h1 {
@@ -5736,7 +5738,7 @@ header h1 img {
    
 }
 header h1 span{
-    color:#fff;
+    color:#000;
     text-decoration: none;
     font-size: 16px;
     margin-top: 3px;
@@ -5784,7 +5786,7 @@ header .container-md > div a:hover,
 header .container-sm > div a:hover,
 header .container-xl > div a:hover,
 header .container-xxl > div a:hover {
-    color: #e13022;
+    color: #e13022 !important;
 }
 header .container-fluid > div nav,
 header .container-lg > div nav,
@@ -5800,7 +5802,8 @@ header .container-md > div nav ul li,
 header .container-sm > div nav ul li,
 header .container-xl > div nav ul li,
 header .container-xxl > div nav ul li {
-    margin: 0 15px;
+    padding: 0 15px;
+    border-right: 1px solid #000;
 }
 header .container-fluid > div nav ul li.dropdown,
 header .container-lg > div nav ul li.dropdown,
@@ -5817,10 +5820,29 @@ header .container-sm > div nav ul li a,
 header .container-xl > div nav ul li a,
 header .container-xxl > div nav ul li a {
     font-size: 16px;
-    color: #fff;
+    color: #000;
     text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+header nav ul li a img{
+    width: 40px;
+}
+header nav ul li a.changeTheme{border-radius: 4px;border: 1px solid #000;display: flex;align-items: center;justify-content: center;cursor: pointer;}
+header nav ul li a img.moonwhite{display: none;}
+header nav ul li a img.moonblack{display: block;}
+
+.darkTheme  nav ul li {border-color: #fff !important;}
+.darkTheme  nav ul li a img.moonwhite{display: block;}
+.darkTheme  nav ul li a img.moonblack{display: none;}
+
 @media (max-width: 768px) {
+    header nav{padding: 0;}
+    .darkTheme  nav ul li a img.moonwhite{display: none;}
+    .darkTheme  nav ul li a img.moonblack{display: block;}
+    
     header .container-fluid > div nav ul li a,
     header .container-lg > div nav ul li a,
     header .container-md > div nav ul li a,
@@ -5922,8 +5944,20 @@ header .mm.active span:last-child {
 }
 
 @media (max-width: 768px) {
-  header{position: relative;}
-  header nav{background-color: #000;}
+    header{position: relative;}
+    header  nav{background-color: #000;padding: 10px 0;}
+    .darkTheme header  nav{background-color: #fff;padding: 10px 0;}
+    .darkTheme header nav{background-color: #000;}
+    header nav ul li a.changeTheme{width: 40px;margin: 0 auto;background-color: #fff !important;}
+    header nav ul li{padding: 10px 5px !important;}
+    header nav ul li a{padding: 0 !important;color:#fff !important;}
+    header nav ul li {border-bottom: 1px solid #fff !important;}
+    .darkTheme  nav ul li {border-bottom: 1px solid #000 !important;}
+    header nav ul li:last-child{border: none !important;padding-bottom: 0 !important;}
+    header nav ul li {border-bottom: 1px solid #000;;}
+    .darkTheme header nav ul li {border-bottom: 1px solid #fff;;}
+    
+  
     body.menuOn header{z-index: 8888;}
     .controls-content {
         display: flex;
@@ -5975,6 +6009,9 @@ header .mm.active span:last-child {
     min-width: 190px;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
+    border: 1px solid #000;
+    color:#000;
 }
 .wallet-connect img {
     display: block;
@@ -5983,6 +6020,9 @@ header .mm.active span:last-child {
 }
 @media(max-width:768px){
     .wallet-connect img{width: 20px;}
+    .darkTheme  nav{background-color:  #fff !important; }
+    .darkTheme  nav ul li {border-right: none !important;}
+    .darkTheme  nav ul li  a{color:#000 !important}
 }
 .wallet-connect:hover {
     box-shadow: 0 1px 16px 0 #e13022;
@@ -6010,14 +6050,15 @@ footer > div{
 }
 .footerRight button{
   background-color: transparent;
-  color:#fff;
+  color:#000;
   padding: 0 14px;
   margin-right: 15px;
-  border:1px solid #fff;
+  border:1px solid #000;
   border-radius: 4px;
   display: flex;
   align-items: center;
   font-size: 14px;
+  height: 30px;
 }
 .footerRight button.wallet-connect{min-width: 170px;}
 .footerRight button img{
@@ -6040,18 +6081,18 @@ footer .footNav ul li {
 }
 footer .footNav ul li a {
     font-size: 14px;
-    color: #fff;
+    color: #000;
     text-decoration: none;
     transition: 0.3s;
 }
 footer .footNav ul li a:hover {
-    color: #e13022;
+    color: #e13022 !important;
 }
 footer .footNav ul li::before {
     position: absolute;
     content: "";
     width: 1px;
-    background-color: #fff;
+    background-color: #000;
     height: 14px;
     left: 0;
     top: 50%;
@@ -6093,7 +6134,7 @@ main section .banner {
 main section .banner h2 {
     line-height: calc(1.325rem + 2.2vw);
     font-size: calc(1.325rem + 1.6vw);
-    color: #fff;
+    color: #000;
     margin-bottom: 35px;
 }
 main section .banner h2 span {
@@ -6133,13 +6174,16 @@ main section .banner-bg {
     z-index: 88;
     flex-direction: column;
 }
-
+.centercontent h3{color:#000 !important;}
+.darkTheme .centercontent h3{color:#fff !important;}
 .search-content form {
     width: 100%;
     height: 60px;
     position: relative;
     display: flex;
     background-color: #fff;
+    border:1px solid #000;
+    border-radius: 4px;
 }
 .search-content form input {
     width: 100%;
@@ -6482,7 +6526,12 @@ ul {
     padding: 5px 15px;
 }
 .search-result-content {
-    background-color: #eae3e3 !important;
+    background-color: #f4f4f4 !important;
+    border-radius: 0 0 4px 4px;
+    border:1px solid #000;
+    border-top:none;
+    position: relative;
+    top:-3px;
 }
 
 .search-content .search-result-content ul li,
@@ -6615,9 +6664,9 @@ ul {
 .text-content {max-width: 80%;margin: 0 auto;}
 .text-content h2{font-size: 40px;}
 .text-content h3{font-size: 28px;}
-.text-content *{color:#fff;}
+.text-content *{color:#000;}
 .text-content p a{transition: .4s;}
-.text-content p a:hover{color:#e13022;}
+.text-content p a:hover{color:#e13022 !important;}
 .text-content p,.text-content ul li{font-family: 'Arial';font-size: 18px;}
 .text-content ul li{position: relative;padding-left: 15px;}
 .text-content ul li::before{display: block;content:"";width: 6px;height: 6px;border-radius: 50%;background-color: #fff;position: absolute;top:9px; left:0;content:"";}
@@ -6629,8 +6678,8 @@ ul {
 
 .white-content{background-color:#fff ;border-radius: 4px;padding: 20px;}
 .countdowncontent{display: flex;justify-content: center;align-items: center;flex-direction: column;}
-.countdowncontent > div{display: flex;align-self: center;justify-self: center;margin-bottom: 10px;color:#fff;}
-.countdowncontent > span{font-size: 18px;}
+.countdowncontent > div{display: flex;align-self: center;justify-self: center;margin-bottom: 10px;color:#000;}
+.countdowncontent > span{font-size: 18px;color:#000;}
 .alert h3{font-size: 20px;}
 @media(max-width:768px){
     .countdowncontent > span{font-size: 14px;}
@@ -6644,7 +6693,7 @@ ul {
     border:1px solid #000;
     align-self: center;
     justify-content: center;
-    background-color: #000;
+    
 }
 .customCounter button{display: flex;justify-content: center;align-items: center;font-size: 22px;font-weight: 700;color:#000;max-width: 30px;min-width: 30px;height:30px;border-radius: 50%;border:1px solid #292525;cursor: pointer;transition: .4s;background-color: #fff;position: relative;}
 
@@ -6679,17 +6728,18 @@ button{border-width: 1px;font-family:rbtm, Arial, Helvetica, sans-serif !importa
     border: 3px solid transparent;  /* creates padding around scroll thumb */
   }
 
+table{ border-collapse: collapse;}
  table thead td, table thead th{font-size: 20px;}
- table tr td,table tr th{color:#fff;border:1px solid #fff;padding:10px;background:rgba(255,255,255,.2);font-family:'Arial';font-size:18px}
+ table tr td,table tr th{color:#000;border:1px solid #000;padding:10px;font-family:'Arial';font-size:18px}
  table tr th{font-weight:bold;}
  table tr td button{height: 30px;font-size: 18px !important;padding: 0;}
 
  table.tabletype2 td,table.tabletype2 th{
-    border: none;
+    
     padding:10px;
 }
  table.tabletype2 tr{
-  border-bottom: 1px solid rgba(255,255,255,.36);
+  border-bottom: 1px solid rgba(0,0,0,.36);
 }
 
  table.tabletype2 tr:last-child{border: none;}
@@ -6744,3 +6794,22 @@ button{border-width: 1px;font-family:rbtm, Arial, Helvetica, sans-serif !importa
 w3m-modal {
     z-index: 9999;
 }
+
+/*Theme Switch*/
+/* body{transition: .2s;} */
+body.darkTheme{background-color: #000 !important;}
+.darkTheme .wallet-connect{background-color: rgb(239, 239, 239);}
+.darkTheme header{box-shadow: 0 1px 6px 0 #fff;background-color:#000 ;}
+.darkTheme footer{background-color:#000 !important;}
+.darkTheme footer  a{border-color:#fff !important;color:#fff !important;}
+.darkTheme footer *::before{background-color: #fff !important;}
+.darkTheme .customCounter{border: 1px solid #fff;}
+.darkTheme .tableContent > span{color:#fff !important;}
+ .centercontent .alert-success h3{color:#198754 !important;}
+ .centercontent .alert-danger h3{color:#58151c !important;}
+.darkTheme header h1 span,.darkTheme .text-content *,.darkTheme .countdowncontent  span{color:#fff;}
+.darkTheme section .banner h2,.darkTheme .countdowncontent > div,.darkTheme table tr td,.darkTheme table tr th{color:#fff;border-color: #fff;}
+.darkTheme table.tabletype2 tr{}
+.darkTheme header .container-fluid > div nav ul li a,.darkTheme  header .container-lg > div nav ul li a,.darkTheme  header .container-md > div nav ul li a,.darkTheme  header .container-sm > div nav ul li a,.darkTheme  header .container-xl > div nav ul li a,.darkTheme  header .container-xxl > div nav ul li a{color:#fff;}
+.darkTheme main section > div h2,.darkTheme main section > div h3,.darkTheme main section > div h2,.darkTheme main section > div p{color:#fff}
+/*Theme Switch*/

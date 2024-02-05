@@ -362,7 +362,7 @@ class Register extends Component {
                                     <button onClick={(e)=> this.handleDurationUp(e)} className="countplus"></button>
                                 </div>
                             </li>
-                            <li className="text-center text-white fw-bold fs-5">
+                            <li className="text-center fw-bold fs-5">
                                 <span>Total: <span className="fw-bold">{formatEther(  this.state.price.toString()) } {process.env.REACT_APP_NATIVE_TOKEN} </span> + GAS Fee</span>
                             </li>
                         </ul> 
@@ -410,7 +410,7 @@ class Register extends Component {
                                 
                             </>
                         }
-                        <span className="mt-2 text-center text-white">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
+                        <span className="mt-2 text-center">Requesting register helps prevent others from registering the name before you do. Your name is not registered until you've completed the second transaction.</span>
                     </div>
                 </div>
                 : 
