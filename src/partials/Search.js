@@ -1,7 +1,7 @@
 import searchIcon from '../assets/images/search-icon.svg';
 import loadericon from '../assets/images/loader-icon.svg';
 import zkfRegisterControllerABI from '../abi/ZKFRegisterController.json'
-import { goerli, zkFair } from 'wagmi/chains'
+import { goerli, sepolia, zkFair } from 'wagmi/chains'
 
 import { useReadContract } from 'wagmi'
 import { useRef, useState } from 'react';
@@ -37,14 +37,13 @@ function Search() {
         abi: zkfRegisterControllerABI
     };
 
-    console.log("NODE_ENV:" + process.env.NODE_ENV);
     console.log("REACT_APP_NODE_ENV:" + process.env.REACT_APP_NODE_ENV);
 
     const { data: available, error, isPending } = useReadContract({
         ...zkfRegisterControllerConfig,
         functionName: 'available',
         args: [name],
-        chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+        chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
     });
  
     if(error) toast.error(error.message)

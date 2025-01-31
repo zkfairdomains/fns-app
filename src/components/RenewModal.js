@@ -10,7 +10,7 @@ import { Modal } from "react-bootstrap";
 import {  } from "@apollo/client";
 import { getExpires, getTimeAgo, obscureName } from "../helpers/String";
 import { getBalance } from '@wagmi/core'
-import { goerli, zkFair } from 'wagmi/chains'
+import { goerli, sepolia, zkFair } from 'wagmi/chains'
 
 class RenewModal extends Component {
 
@@ -57,7 +57,7 @@ class RenewModal extends Component {
                 args: [ this.props.domain.labelName, this.getDuration() ],
                 account: this.props.owner,
                 value: this.state.price,
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
 
             toast.success("Your transaction has been sent.");
@@ -106,7 +106,7 @@ class RenewModal extends Component {
                 functionName: 'rentPrice',
                 args: [this.props.domain.labelName, this.getDuration()],
                 account: this.props.owner,
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
             
             console.log(_price) 
@@ -127,7 +127,7 @@ class RenewModal extends Component {
 
             const balance = await getBalance(wagmiConfig, {
                 address: this.props.owner, 
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
 
             this.setState({ isGettingBalance : false, balance: balance.value });

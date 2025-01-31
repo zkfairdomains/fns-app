@@ -13,7 +13,7 @@ import { GET_DOMAIN } from "../graphql/Domain";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { getDateSimple, getExpires, getLabelHash, getNameHash, getOneYearDuration, getTimeAgo, getTokenId, obscureLabel, obscureName } from "../helpers/String";
 import { getBalance } from '@wagmi/core'
-import { goerli, zkFair } from 'wagmi/chains'
+import { goerli, sepolia, zkFair } from 'wagmi/chains'
 
 class Register extends Component {
      
@@ -73,7 +73,7 @@ class Register extends Component {
                 functionName: "makeCommitment",
                 args: [ this.props.name, this.props.owner, this.getDuration(), secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner,
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
 
             console.log("make: "+ _commitment)
@@ -91,7 +91,7 @@ class Register extends Component {
                 functionName: "commitments",
                 args: [ _commitment ],
                 account: this.props.owner,
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
  
             console.log("Result: "+ result  );
@@ -141,7 +141,7 @@ class Register extends Component {
                 functionName: "commit",
                 args: [ this.state.commitment ],
                 account: this.props.owner,
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
 
           
@@ -184,7 +184,7 @@ class Register extends Component {
                 args: [ this.props.name, this.props.owner, this.getDuration(), this.state.secret, this.resolver, this.data, this.reverseRecord ],
                 account: this.props.owner,
                 value: this.state.price,
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
 
             toast.success("Your transaction has been sent.");
@@ -218,7 +218,7 @@ class Register extends Component {
                 functionName: 'available',
                 args: [this.props.name],
                 account: this.props.owner,
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
 
             this.setState({ isAvailablePending: false });
@@ -277,7 +277,7 @@ class Register extends Component {
                 functionName: 'rentPrice',
                 args: [this.props.name, this.getDuration()],
                 account: this.props.owner,
-                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: goerli.id
+                chainId: process.env.REACT_APP_NODE_ENV === "production" ? zkFair.id: sepolia.id
             });
             
             console.log(_price)
